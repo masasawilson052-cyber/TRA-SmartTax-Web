@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRA SmartTax - Premium AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Clean, modern typeface similar to ChatGPT/Gemini/SaaS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Chart.js for Interactive Dashboard -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Landing Page (Shown initially) -->
+    <div id="landing-page" class="landing-container">
+        <div class="landing-content">
+            <div class="landing-logo">
+                <i class="fa-solid fa-bolt" style="color: var(--primary-accent); font-size: 3rem; margin-bottom: 24px;"></i>
+            </div>
+            <h1 class="landing-title">Welcome to TRA SmartTax</h1>
+            <p class="landing-subtitle">The Future of Tax in Tanzania. Powered by AI, designed for simplicity, and built to empower every taxpayer.</p>
+            <button class="btn-primary landing-btn" onclick="launchApp()">
+                Launch Dashboard <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Application (Hidden initially) -->
+    <div class="app-container" id="main-app" style="display: none;">
+        
+        <!-- Top Navbar -->
+        <header class="top-navbar">
+            <div class="logo-area">
+                <i class="fa-solid fa-bars mobile-menu-btn" onclick="toggleMobileMenu()"></i>
+                <h1>TRA SmartTax</h1>
+            </div>
+            
+            <div class="search-area">
+                <div class="search-box" style="position: relative; overflow: visible;">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search features, forms..." id="globalSearch">
+                    
+                    <!-- Search Results Dropdown -->
+                    <div id="searchResults" class="search-results-dropdown" style="display: none;"></div>
+                </div>
+            </div>
+            
+            <div class="action-icons">
+                <i class="fa-regular fa-bell" style="cursor: pointer;"></i>
+                <div class="profile-pic" style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #E1E0FA;">
+                    <i class="fa-solid fa-user" style="color: #1A1C38; font-size: 14px;"></i>
+                </div>
+                
+                <div class="lang-switch" style="margin-left: 10px;">
+                    <button class="lang-btn active" onclick="setLanguage('en')" id="btn-en">EN</button>
+                    <button class="lang-btn" onclick="setLanguage('sw')" id="btn-sw">SW</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <!-- Primary Sidebar (Thin, Dark) -->
+            <aside class="sidebar-primary">
+                <!-- Icons removed. Primary sidebar reserved for future top-level modules -->
+            </aside>
+
+            <!-- Secondary Sidebar (Light Purple) -->
+            <aside class="sidebar-secondary">
+                <nav class="nav-menu">
+                    <!-- Links matching the requested design (no icons, active is dark pill) -->
+                    <a href="#" class="nav-item active" data-target="dashboard">
+                        <span id="t-nav-dashboard">Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="assistant">
+                        <span id="t-nav-assistant">AI Assistant</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="calculator">
+                        <span id="t-nav-calculator">Tax Calculator</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="records">
+                        <span id="t-nav-records">AI Receipt Scan</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="efd">
+                        <span id="t-nav-efd">Virtual EFD (e-Receipt)</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="reminders">
+                        <span id="t-nav-deadlines">Deadlines</span>
+                    </a>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" onchange="toggleTheme()" />
+                        <div class="slider round"></div>
+                    </label>
+                    <span id="t-dark-mode">Dark Mode</span>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                
+                <!-- Chat Canvas -->
+                <section id="view-assistant" class="view">
+                    <div class="chat-canvas">
+                        
+                        <!-- Center Greeting & Suggestions (Shown initially) -->
+                        <div class="ai-greeting-container" id="aiGreeting">
+                            <div class="ai-greeting-icon"><i class="fa-solid fa-sparkles"></i></div>
+                            <h2 id="t-ai-greet-title">How can I help you today?</h2>
+                            
+                            <!-- Grid of Optional Questions -->
+                            <div class="ai-suggestions-grid">
+                                <div class="ai-suggestion-card" onclick="sendSuggestion('sg1')">
+                                    <div class="card-icon"><i class="fa-solid fa-id-card"></i></div>
+                                    <div class="card-text">
+                                        <h4 id="t-sg1-title">Register for TIN</h4>
+                                        <p id="t-sg1-sub">Learn the step-by-step process</p>
+                                    </div>
+                                </div>
+                                <div class="ai-suggestion-card" onclick="sendSuggestion('sg2')">
+                                    <div class="card-icon"><i class="fa-solid fa-calculator"></i></div>
+                                    <div class="card-text">
+                                        <h4 id="t-sg2-title">Calculate Tax</h4>
+                                        <p id="t-sg2-sub">Estimate for small businesses</p>
+                                    </div>
+                                </div>
+                                <div class="ai-suggestion-card" onclick="sendSuggestion('sg3')">
+                                    <div class="card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                    <div class="card-text">
+                                        <h4 id="t-sg3-title">Late Penalties</h4>
+                                        <p id="t-sg3-sub">Understand VAT fines</p>
+                                    </div>
+                                </div>
+                                <div class="ai-suggestion-card" onclick="sendSuggestion('sg4')">
+                                    <div class="card-icon"><i class="fa-solid fa-qrcode"></i></div>
+                                    <div class="card-text">
+                                        <h4 id="t-sg4-title">Virtual EFD</h4>
+                                        <p id="t-sg4-sub">Guide to digital receipts</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Messages Container (Hidden initially) -->
+                        <div class="chat-body" id="chatBox" style="display: none;">
+                        </div>
+                        
+                        <!-- Bottom Input Area -->
+                        <div class="chat-footer">
+                            <div class="chat-suggestions" id="bottomSuggestions" style="display: none; justify-content: center; flex-wrap: wrap; margin-bottom: 16px;">
+                                <button class="suggestion-chip" id="t-chip-1" onclick="sendSuggestion('sg1')">TIN Registration</button>
+                                <button class="suggestion-chip" id="t-chip-2" onclick="sendSuggestion('sg2')">Calculate Tax</button>
+                                <button class="suggestion-chip" id="t-chip-3" onclick="sendSuggestion('sg3')">Penalties</button>
+                                <button class="suggestion-chip" id="t-chip-4" onclick="sendSuggestion('sg4')">Virtual EFD</button>
+                                <button class="suggestion-chip" id="t-chip-5" onclick="sendSuggestion('sg5')">File Returns</button>
+                                <button class="suggestion-chip" id="t-chip-6" onclick="sendSuggestion('sg6')">Pay by USSD</button>
+                            </div>
+                            <div class="floating-input-container">
+                                <button class="input-action-btn" title="Upload File" onclick="alert('File upload prompt opened')"><i class="fa-solid fa-paperclip"></i></button>
+                                <input type="text" id="chatInput" placeholder="Message SmartTax AI..." onkeypress="handleKeyPress(event)">
+                                <button class="input-action-btn" title="Voice Input" onclick="alert('Listening...')"><i class="fa-solid fa-microphone"></i></button>
+                                <button class="send-btn" onclick="sendMessage()"><i class="fa-solid fa-arrow-up"></i></button>
+                            </div>
+                            <div class="disclaimer" id="t-disclaimer">SmartTax AI can make mistakes. Please verify important tax information.</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dashboard Canvas -->
+                <section id="view-dashboard" class="view active">
+                    <div class="dashboard-canvas">
+                        <div class="dashboard-header">
+                            <h1 id="t-dash-title">Dashboard</h1>
+                            <p id="t-dash-subtitle">Your personalized tax summary</p>
+                        </div>
+
+                        <div class="dashboard-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon" style="color: #3B82F6;"><i class="fa-solid fa-wallet"></i></div>
+                                <div class="stat-value">TZS 150,000</div>
+                                <div class="stat-label" id="t-dash-tax">Est. Tax Due</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon" style="color: #10B981;"><i class="fa-regular fa-calendar-check"></i></div>
+                                <div class="stat-value">Sep 30</div>
+                                <div class="stat-label" id="t-dash-deadline">Next Deadline</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon" style="color: #8B5CF6;"><i class="fa-solid fa-receipt"></i></div>
+                                <div class="stat-value">142</div>
+                                <div class="stat-label" id="t-dash-receipts">Receipts Issued</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Chart area - Styled like the cards in the image -->
+                        <div class="content-card" style="margin-top: 40px;">
+                            <h3 style="margin-bottom: 20px;" id="t-chart-title">Revenue vs Estimated Tax (2026)</h3>
+                            <canvas id="taxChart" height="100"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tax Calculator View -->
+                <section id="view-calculator" class="view">
+                    <div class="dashboard-canvas">
+                        <div class="dashboard-header">
+                            <h1 id="t-calc-title">Interactive Tax Calculator</h1>
+                            <p id="t-calc-sub">Instantly estimate your TRA tax obligations</p>
+                        </div>
+                        <div class="content-card">
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; margin-bottom: 8px; font-weight: 500;" id="t-calc-type-label">Business Type</label>
+                                <select id="calc-type" class="custom-input">
+                                    <option value="presumptive" id="t-calc-opt1">Presumptive Tax (Small Trader / Machinga)</option>
+                                    <option value="presumptive_transport" id="t-calc-opt-transport">Passenger Transport (Daladala/Bodaboda)</option>
+                                    <option value="individual" id="t-calc-opt-ind">Sole Proprietor (Individual Income Tax)</option>
+                                    <option value="professional" id="t-calc-opt-prof">Professional Services (Consultant)</option>
+                                    <option value="corporate" id="t-calc-opt2">Corporate Tax (Company - 30%)</option>
+                                </select>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; margin-bottom: 8px; font-weight: 500;" id="t-calc-rev-label">Estimated Annual Turnover (TZS)</label>
+                                <input type="number" id="calc-revenue" placeholder="e.g. 5000000" class="custom-input">
+                            </div>
+                            <button onclick="calculateTax()" class="btn-primary" id="t-calc-btn">
+                                <i class="fa-solid fa-calculator"></i> Calculate Tax
+                            </button>
+
+                            <div id="calc-result" class="result-box" style="display: none;">
+                                <h3 style="color: #10B981; margin-bottom: 8px;" id="t-calc-res-title">Estimated Tax Due</h3>
+                                <div id="calc-amount" style="font-size: 2.5rem; font-weight: 700; color: var(--text-dark);">TZS 0</div>
+                                <p style="color: var(--text-muted); margin-top: 4px;" id="calc-breakdown">Based on presumptive tax brackets.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Records / AI Scanner View -->
+                <section id="view-records" class="view">
+                    <div class="dashboard-canvas">
+                        <div class="dashboard-header">
+                            <h1 id="t-records-title">AI Receipt Scanner</h1>
+                            <p id="t-records-sub">Upload a receipt and let AI extract the data for your records.</p>
+                        </div>
+                        
+                        <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                            <div class="upload-zone" onclick="document.getElementById('file-upload').click()">
+                                <input type="file" id="file-upload" style="display: none;" accept="image/*,.pdf" onchange="simulateScan()">
+                                <i class="fa-solid fa-cloud-arrow-up" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 16px;"></i>
+                                <h3 id="t-upload-title" style="margin-bottom: 8px;">Click to Upload Receipt</h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">Supports JPG, PNG, PDF</p>
+                            </div>
+
+                            <div class="content-card scan-results">
+                                <h3 style="margin-bottom: 24px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fa-solid fa-microchip" style="color: var(--primary-accent);"></i> <span id="t-scan-title">AI Extracted Data</span>
+                                </h3>
+                                
+                                <div id="scan-loading" style="display: none; text-align: center; padding: 40px;">
+                                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; color: var(--primary-accent); margin-bottom: 16px;"></i>
+                                    <p style="color: var(--text-muted);">AI is analyzing the receipt...</p>
+                                </div>
+
+                                <table id="scan-table" class="data-table" style="display: none;">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Merchant</th>
+                                        <th>Category</th>
+                                        <th>Amount (TZS)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>2026-07-28</td>
+                                        <td>Stationery Plus Ltd</td>
+                                        <td><span class="badge">Office Supplies</span></td>
+                                        <td style="font-weight: 600;">125,000</td>
+                                    </tr>
+                                </table>
+                                <p id="empty-state" style="color: var(--text-muted); text-align: center; padding: 40px;">No receipt uploaded yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="view-reminders" class="view">
+                    <div class="dashboard-canvas">
+                        <div class="dashboard-header">
+                            <h1 id="t-reminders-title">Tax Calendar & Deadlines</h1>
+                            <p id="t-reminders-sub">Never miss a TRA deadline with automated reminders.</p>
+                        </div>
+                        
+                        <div style="display: grid; gap: 20px;">
+                            
+                            <div class="content-card" style="display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #EF4444;">
+                                <div>
+                                    <h3 style="margin-bottom: 8px;" id="t-dead-vat">Value Added Tax (VAT) Return</h3>
+                                    <p style="color: var(--text-muted); font-size: 0.9rem;" id="t-dead-vat-sub">Due by the 20th of the following month</p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-weight: 700; color: #EF4444; font-size: 1.1rem;">August 20, 2026</div>
+                                    <button class="btn-primary" style="padding: 8px 16px; margin-top: 8px; font-size: 0.85rem; background: var(--topbar-bg); color: #EF4444; border: 1px solid #EF4444;" onclick="alert('Reminder synced to your Google Calendar!')">
+                                        <i class="fa-regular fa-bell"></i> Remind Me
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="content-card" style="display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #F59E0B;">
+                                <div>
+                                    <h3 style="margin-bottom: 8px;" id="t-dead-paye">PAYE & SDL Returns</h3>
+                                    <p style="color: var(--text-muted); font-size: 0.9rem;" id="t-dead-paye-sub">Due by the 7th of the following month</p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-weight: 700; color: #F59E0B; font-size: 1.1rem;">August 7, 2026</div>
+                                    <button class="btn-primary" style="padding: 8px 16px; margin-top: 8px; font-size: 0.85rem; background: var(--topbar-bg); color: #F59E0B; border: 1px solid #F59E0B;" onclick="alert('Reminder synced to your Google Calendar!')">
+                                        <i class="fa-regular fa-bell"></i> Remind Me
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="content-card" style="display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #10B981;">
+                                <div>
+                                    <h3 style="margin-bottom: 8px;" id="t-dead-corp">Corporate Tax Installment</h3>
+                                    <p style="color: var(--text-muted); font-size: 0.9rem;" id="t-dead-corp-sub">Quarterly provisional estimates</p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-weight: 700; color: #10B981; font-size: 1.1rem;">September 30, 2026</div>
+                                    <button class="btn-primary" style="padding: 8px 16px; margin-top: 8px; font-size: 0.85rem; background: var(--topbar-bg); color: #10B981; border: 1px solid #10B981;" onclick="alert('Reminder synced to your Google Calendar!')">
+                                        <i class="fa-regular fa-bell"></i> Remind Me
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Virtual EFD View -->
+                <section id="view-efd" class="view">
+                    <div class="dashboard-canvas">
+                        <div class="dashboard-header">
+                            <h1 id="t-efd-title">Virtual EFD System</h1>
+                            <p id="t-efd-sub">Generate TRA-compliant electronic receipts directly from the web.</p>
+                        </div>
+                        
+                        <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                            <!-- EFD Form -->
+                            <div class="content-card" style="flex: 1; min-width: 300px;">
+                                <h3 style="margin-bottom: 20px;" id="t-efd-form-title">New e-Receipt</h3>
+                                <div style="margin-bottom: 16px;">
+                                    <label style="display: block; margin-bottom: 8px; font-weight: 500;" id="t-efd-cust">Customer Name (Optional)</label>
+                                    <input type="text" id="efd-input-cust" class="custom-input" placeholder="e.g. John Doe">
+                                </div>
+                                <div style="margin-bottom: 16px;">
+                                    <label style="display: block; margin-bottom: 8px; font-weight: 500;" id="t-efd-desc">Item Description</label>
+                                    <input type="text" id="efd-input-desc" class="custom-input" placeholder="e.g. Consulting Services">
+                                </div>
+                                <div style="margin-bottom: 24px;">
+                                    <label style="display: block; margin-bottom: 8px; font-weight: 500;" id="t-efd-amt">Amount (TZS)</label>
+                                    <input type="number" id="efd-input-amt" class="custom-input" placeholder="e.g. 50000">
+                                </div>
+                                <button class="btn-primary" style="width: 100%; display: flex; justify-content: center; gap: 8px;" onclick="generateReceipt()">
+                                    <i class="fa-solid fa-qrcode"></i> <span id="t-efd-btn">Generate e-Receipt</span>
+                                </button>
+                            </div>
+
+                            <!-- EFD Preview (Hidden by default) -->
+                            <div id="efd-preview" class="content-card" style="flex: 1; min-width: 300px; display: none; background: #fff; border: 1px dashed #ccc; box-shadow: none;">
+                                <div style="text-align: center; font-family: monospace; color: #333;">
+                                    <h2 style="margin-bottom: 8px;">TRA e-RECEIPT</h2>
+                                    <p style="font-size: 0.8rem; margin-bottom: 4px;">SmartTax AI LTD</p>
+                                    <p style="font-size: 0.8rem; margin-bottom: 4px;">TIN: 123-456-789</p>
+                                    <p style="font-size: 0.8rem; margin-bottom: 16px; font-weight: bold;" id="efd-out-cust">Customer: Cash Customer</p>
+                                    
+                                    <div style="border-top: 1px dashed #ccc; border-bottom: 1px dashed #ccc; padding: 16px 0; margin-bottom: 16px; text-align: left;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                            <span id="efd-out-desc">Consulting Services</span>
+                                            <span id="efd-out-amt">50,000.00</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; font-weight: bold; margin-top: 16px;">
+                                            <span>TOTAL TZS</span>
+                                            <span id="efd-out-total">50,000.00</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <i class="fa-solid fa-qrcode" style="font-size: 5rem; margin: 16px 0;"></i>
+                                    <p style="font-size: 0.7rem;" id="efd-out-num">Rct Num: TZ-EFD-992384</p>
+                                    <p style="font-size: 0.7rem; margin-bottom: 16px;" id="efd-out-date">Date: 2026-07-29 14:48:00</p>
+                                    
+                                    <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;" onclick="alert('PDF Downloaded!')">
+                                        <i class="fa-solid fa-download"></i> Download PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
