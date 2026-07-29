@@ -57,7 +57,32 @@ const translations = {
         efdCust: "Customer Name (Optional)",
         efdDesc: "Item Description",
         efdAmt: "Amount (TZS)",
-        efdBtn: "Generate e-Receipt"
+        efdBtn: "Generate e-Receipt",
+        navProposal: "TRA Proposal Docs",
+        propTitle: "TRA Proposal Documentation",
+        propSub: "Business case, implementation roadmap, and security compliance.",
+        dashScoreTitle: "Business Readiness Score",
+        dashScore1: "TIN registered and verified.",
+        dashScore2: "Receipts uploaded this month.",
+        dashScore3: "Business profile complete.",
+        dashActTitle: "Recent Activity",
+        dashAct1: "Receipt added",
+        dashAct2: "Expense corrected",
+        dashAct3: "Deadline reminder created",
+        dashAct4: "Monthly summary reviewed",
+        dashReview: "Records requiring review",
+        chartTitle: "Revenue vs Estimated Tax (2026)",
+        calcTitle: "Interactive Tax Calculator",
+        calcSub: "Instantly estimate your TRA tax obligations",
+        calcTypeLabel: "Business Type",
+        calcRevLabel: "Estimated Annual Turnover (TZS)",
+        calcBtn: "Calculate Tax",
+        calcResTitle: "Tax Estimate",
+        calcWarnTitle: "Estimate Warning",
+        calcWarnText: "This is an estimate based on provided figures. Final tax obligations are subject to official TRA review and assessment.",
+        uploadTitle: "Tap to capture receipt",
+        scanTitle: "AI Extracted Data",
+        scanConfirm: "Confirm and save to records"
     },
     sw: {
         navAssistant: "Msaidizi wa AI",
@@ -117,7 +142,32 @@ const translations = {
         efdCust: "Jina la Mteja (Sio lazima)",
         efdDesc: "Maelezo ya Bidhaa/Huduma",
         efdAmt: "Kiasi (TZS)",
-        efdBtn: "Tengeneza Risiti"
+        efdBtn: "Tengeneza Risiti",
+        navProposal: "Nyaraka za Pendekezo",
+        propTitle: "Nyaraka za Pendekezo la TRA",
+        propSub: "Umuhimu wa biashara, mpango wa utekelezaji, na usalama wa data.",
+        dashScoreTitle: "Kiwango cha Utayari wa Biashara",
+        dashScore1: "TIN imesajiliwa na kuhakikiwa.",
+        dashScore2: "Risiti zimepakiwa mwezi huu.",
+        dashScore3: "Taarifa za biashara zimekamilika.",
+        dashActTitle: "Shughuli za Hivi Karibuni",
+        dashAct1: "Risiti imeongezwa",
+        dashAct2: "Matumizi yamerekebishwa",
+        dashAct3: "Kikumbusho kimetengenezwa",
+        dashAct4: "Muhtasari wa mwezi umekaguliwa",
+        dashReview: "Rekodi zinazohitaji uhakiki",
+        chartTitle: "Mauzo dhidi ya Kodi Inayokadiriwa (2026)",
+        calcTitle: "Kikokotoo cha Kodi",
+        calcSub: "Kadiria kodi yako ya TRA hapo hapo",
+        calcTypeLabel: "Aina ya Biashara",
+        calcRevLabel: "Kadirio la Mauzo kwa Mwaka (TZS)",
+        calcBtn: "Kadiria Kodi",
+        calcResTitle: "Kadirio la Kodi",
+        calcWarnTitle: "Tahadhari ya Kadirio",
+        calcWarnText: "Hili ni kadirio kulingana na takwimu ulizotoa. Kodi ya mwisho itategemea uhakiki na tathmini rasmi ya TRA.",
+        uploadTitle: "Gusa kupiga picha ya risiti",
+        scanTitle: "Data Zilizotolewa na AI",
+        scanConfirm: "Thibitisha na hifadhi kwenye rekodi"
     }
 };
 
@@ -239,6 +289,65 @@ function setLanguage(lang) {
     if(efdAmt) efdAmt.textContent = t.efdAmt;
     const efdBtn = document.getElementById('t-efd-btn');
     if(efdBtn) efdBtn.textContent = t.efdBtn;
+
+    // Newly Added Translations
+    const navProp = document.getElementById('t-nav-proposal');
+    if(navProp) navProp.textContent = t.navProposal;
+    const propTitle = document.getElementById('t-prop-title');
+    if(propTitle) propTitle.textContent = t.propTitle;
+    const propSub = document.getElementById('t-prop-sub');
+    if(propSub) propSub.textContent = t.propSub;
+
+    const dashScoreTitle = document.getElementById('t-dash-score-title');
+    if(dashScoreTitle) dashScoreTitle.textContent = t.dashScoreTitle;
+    const dashScore1 = document.getElementById('t-dash-score-1');
+    if(dashScore1) dashScore1.textContent = t.dashScore1;
+    const dashScore2 = document.getElementById('t-dash-score-2');
+    if(dashScore2) dashScore2.textContent = t.dashScore2;
+    const dashScore3 = document.getElementById('t-dash-score-3');
+    if(dashScore3) dashScore3.textContent = t.dashScore3;
+
+    const dashActTitle = document.getElementById('t-dash-activity-title');
+    if(dashActTitle) dashActTitle.textContent = t.dashActTitle;
+    const dashAct1 = document.getElementById('t-dash-act-1');
+    if(dashAct1) dashAct1.textContent = t.dashAct1;
+    const dashAct2 = document.getElementById('t-dash-act-2');
+    if(dashAct2) dashAct2.textContent = t.dashAct2;
+    const dashAct3 = document.getElementById('t-dash-act-3');
+    if(dashAct3) dashAct3.textContent = t.dashAct3;
+    const dashAct4 = document.getElementById('t-dash-act-4');
+    if(dashAct4) dashAct4.textContent = t.dashAct4;
+
+    const dashReview = document.getElementById('t-dash-review');
+    if(dashReview) dashReview.textContent = t.dashReview;
+    const chartTitle = document.getElementById('t-chart-title');
+    if(chartTitle) chartTitle.textContent = t.chartTitle;
+
+    const calcTitle = document.getElementById('t-calc-title');
+    if(calcTitle) calcTitle.textContent = t.calcTitle;
+    const calcSub = document.getElementById('t-calc-sub');
+    if(calcSub) calcSub.textContent = t.calcSub;
+    const calcTypeLabel = document.getElementById('t-calc-type-label');
+    if(calcTypeLabel) calcTypeLabel.textContent = t.calcTypeLabel;
+    const calcRevLabel = document.getElementById('t-calc-rev-label');
+    if(calcRevLabel) calcRevLabel.textContent = t.calcRevLabel;
+    const calcBtn = document.getElementById('t-calc-btn');
+    if(calcBtn) calcBtn.textContent = t.calcBtn;
+    
+    const calcResTitle = document.getElementById('t-calc-res-title');
+    if(calcResTitle) calcResTitle.textContent = t.calcResTitle;
+    const calcWarnTitle = document.getElementById('t-calc-warn-title');
+    if(calcWarnTitle) calcWarnTitle.textContent = t.calcWarnTitle;
+    const calcWarnText = document.getElementById('t-calc-warn-text');
+    if(calcWarnText) calcWarnText.textContent = t.calcWarnText;
+
+    const uploadTitle = document.getElementById('t-upload-title');
+    if(uploadTitle) uploadTitle.textContent = t.uploadTitle;
+    const scanTitle = document.getElementById('t-scan-title');
+    if(scanTitle) scanTitle.textContent = t.scanTitle;
+    const scanConfirm = document.getElementById('t-scan-confirm');
+    if(scanConfirm) scanConfirm.textContent = t.scanConfirm;
+
 
     // Update Chart if it exists
     if(taxChartInstance) {
@@ -389,64 +498,58 @@ function calculateTax() {
     const revenue = parseFloat(revInput) || 0;
     
     let tax = 0;
-    let breakdown = "";
+    let explanation = "";
     
     if (type === 'corporate') {
         tax = revenue * 0.30;
-        breakdown = currentLang === 'sw' ? "Kodi ya Makampuni (30% ya Faida/Mauzo)" : "Corporate Tax (30% flat rate used for estimate)";
+        explanation = currentLang === 'sw' 
+            ? `Kama kampuni iliyosajiliwa, unawajibika kulipa kodi ya makampuni ya 30% ya faida. Makadirio ya kodi kwa mauzo yako ni <strong style="color: var(--primary-accent);">TZS ${tax.toLocaleString()}</strong>.` 
+            : `As a registered corporation, you are liable for a 30% corporate tax rate on profit. Your estimated obligation based on turnover is <strong style="color: var(--primary-accent);">TZS ${tax.toLocaleString()}</strong>.`;
     } else if (type === 'professional') {
-        tax = revenue * 0.05; // 5% withholding / standard estimate
-        breakdown = currentLang === 'sw' ? "Huduma za Kitaalamu (Kadirio la 5%)" : "Professional Services (5% estimate)";
+        tax = revenue * 0.05;
+        explanation = currentLang === 'sw' 
+            ? `Kama mtoa huduma za kitaalamu, unatozwa zuio la 5%. Makadirio ya kodi yako ni <strong style="color: var(--primary-accent);">TZS ${tax.toLocaleString()}</strong>.` 
+            : `As a professional services provider, you are subject to a 5% withholding estimate. Your estimated obligation is <strong style="color: var(--primary-accent);">TZS ${tax.toLocaleString()}</strong>.`;
     } else if (type === 'presumptive_transport') {
-        tax = revenue * 0.02; // Special flat rate estimate for transport
-        breakdown = currentLang === 'sw' ? "Kodi ya Usafirishaji (Kadirio maalum)" : "Transport Tax (Special presumptive rate)";
+        tax = revenue * 0.02;
+        explanation = currentLang === 'sw' 
+            ? `Katika sekta ya usafirishaji, unatumia viwango maalum. Makadirio ya kodi yako ni <strong style="color: var(--primary-accent);">TZS ${tax.toLocaleString()}</strong>.` 
+            : `In the passenger transport sector, you qualify for special presumptive rates. Your estimated obligation is <strong style="color: var(--primary-accent);">TZS ${tax.toLocaleString()}</strong>.`;
     } else if (type === 'individual') {
-        // Highly simplified progressive brackets
         if(revenue <= 3270000) tax = 0;
-        else tax = revenue * 0.15; // Average simplified rate
-        breakdown = currentLang === 'sw' ? "Kodi ya Mtu Binafsi (Kadirio la Wastani)" : "Individual Income Tax (Average Estimate)";
+        else tax = revenue * 0.15;
+        explanation = currentLang === 'sw' 
+            ? `Kama mfanyabiashara binafsi, kodi inategemea faida halisi (kadirio la wastani 15%). Makadirio ya kodi yako ni <strong style="color: var(--primary-accent);">TZS ${tax.toLocaleString()}</strong>.` 
+            : `As a sole proprietor, tax is based on progressive bands. Using an average 15% estimate, your obligation is <strong style="color: var(--primary-accent);">TZS ${tax.toLocaleString()}</strong>.`;
     } else {
         // Presumptive retail
         if (revenue <= 4000000) {
             tax = 0;
-            breakdown = currentLang === 'sw' ? "Hakuna Kodi (Mauzo chini ya 4M)" : "Nil Tax (Turnover below 4M)";
+            explanation = currentLang === 'sw' 
+                ? `Kwa sababu mauzo yako yako chini ya 4M, unasamehewa kodi. Makadirio ya kodi yako ni <strong style="color: var(--primary-accent);">TZS 0</strong>.` 
+                : `Because your turnover is under 4M, you qualify for a nil rate under presumptive tax. Your estimated obligation is <strong style="color: var(--primary-accent);">TZS 0</strong>.`;
         } else if (revenue <= 7000000) {
             tax = 100000;
-            breakdown = currentLang === 'sw' ? "Kodi Maalum (Mauzo 4M - 7M)" : "Fixed Tax (Turnover 4M - 7M)";
+            explanation = currentLang === 'sw' 
+                ? `Kwa mauzo ya kati ya 4M na 7M, unalipa kodi maalum ya TZS 100,000. Makadirio ya kodi yako ni <strong style="color: var(--primary-accent);">TZS 100,000</strong>.` 
+                : `For turnover between 4M and 7M, you qualify for a fixed presumptive tax of 100,000. Your estimated obligation is <strong style="color: var(--primary-accent);">TZS 100,000</strong>.`;
         } else if (revenue <= 11000000) {
             tax = 250000;
-            breakdown = currentLang === 'sw' ? "Kodi Maalum (Mauzo 7M - 11M)" : "Fixed Tax (Turnover 7M - 11M)";
+            explanation = currentLang === 'sw' 
+                ? `Kwa mauzo ya kati ya 7M na 11M, unalipa kodi maalum ya TZS 250,000. Makadirio ya kodi yako ni <strong style="color: var(--primary-accent);">TZS 250,000</strong>.` 
+                : `For turnover between 7M and 11M, you qualify for a fixed presumptive tax of 250,000. Your estimated obligation is <strong style="color: var(--primary-accent);">TZS 250,000</strong>.`;
         } else {
-            tax = revenue * 0.035; // Simplified presumptive 3.5%
-            breakdown = currentLang === 'sw' ? "3.5% ya Mauzo (Kadirio la juu ya 11M)" : "3.5% of Turnover (Estimate for >11M)";
+            tax = revenue * 0.035;
+            explanation = currentLang === 'sw' 
+                ? `Kwa mauzo zaidi ya 11M, kodi inakadiriwa kwa asilimia. Makadirio yako ni <strong style="color: var(--primary-accent);">TZS ${tax.toLocaleString()}</strong>.` 
+                : `For turnover above 11M, tax is estimated using a percentage rate. Your estimated obligation is <strong style="color: var(--primary-accent);">TZS ${tax.toLocaleString()}</strong>.`;
         }
     }
     
     document.getElementById('calc-result').style.display = 'block';
-    document.getElementById('calc-amount').textContent = `TZS ${tax.toLocaleString()}`;
-    document.getElementById('calc-breakdown').textContent = breakdown;
+    document.getElementById('calc-explanation').innerHTML = explanation;
 }
 
-// AI Receipt Scanner Logic
-function simulateScan() {
-    const btn = document.querySelector('.upload-zone');
-    const loading = document.getElementById('scan-loading');
-    const table = document.getElementById('scan-table');
-    const empty = document.getElementById('empty-state');
-    
-    btn.style.opacity = '0.5';
-    btn.style.pointerEvents = 'none';
-    empty.style.display = 'none';
-    table.style.display = 'none';
-    loading.style.display = 'block';
-    
-    setTimeout(() => {
-        btn.style.opacity = '1';
-        btn.style.pointerEvents = 'auto';
-        loading.style.display = 'none';
-        table.style.display = 'table';
-    }, 3000); // 3 second mock scan
-}
 
 // Chatbot Logic
 function handleKeyPress(event) {
@@ -543,38 +646,33 @@ function generateAIResponse(message) {
 
     if (lowerMsg.includes('calculate') || lowerMsg.includes('kadiria') || lowerMsg.includes('estimate') || lowerMsg.includes('makadirio')) {
         return isSwahili
-            ? "**Kukadiria Kodi ya Biashara (Presumptive Tax):**\nKama wewe ni mfanyabiashara mdogo, kodi yako inakadiriwa kulingana na mauzo yako ya mwaka:\n\n- **Tsh 0 hadi Milioni 4:** Hulipi kodi kabisa (TZS 0).\n- **Milioni 4 hadi Milioni 7:** TZS 100,000/= kwa mwaka.\n- **Milioni 7 hadi Milioni 11:** TZS 250,000/= kwa mwaka.\n- **Milioni 11 hadi Milioni 100:** Kiasi kinachozidi hutozwa asilimia maalum.\n\nIli kupata makadirio sahihi ya kodi yako, tafadhali bofya 'Tax Calculator' (Kikokotoo cha Kodi) kwenye menyu ya kushoto."
-            : "**Estimating Presumptive Tax:**\nFor small business owners, your tax is calculated based on your annual turnover (revenue):\n\n- **TZS 0 to 4 Million:** No tax is payable (TZS 0).\n- **4 Million to 7 Million:** TZS 100,000/= per year.\n- **7 Million to 11 Million:** TZS 250,000/= per year.\n- **11 Million to 100 Million:** The excess is taxed at a specific percentage.\n\nFor a precise and personalized calculation, please use the 'Tax Calculator' located in the left menu of this dashboard.";
+            ? `<strong>Jibu Fupi:</strong> Kodi inategemea na mauzo yako. Kwa mauzo chini ya TZS 4,000,000, hulipi kodi (Presumptive tax).\n\n<strong>Hatua za Kufuata:</strong>\n- Kusanya rekodi zako zote za mauzo.\n- Jua kiasi cha mauzo kwa mwaka mzima.\n- Tumia kikokotoo chetu kujua kiasi kamili.\n\n<i class="fa-solid fa-triangle-exclamation" style="color:var(--highlight)"></i> <strong>Tahadhari:</strong> Hiki ni makadirio tu. TRA wanaweza kuhitaji uthibitisho wa mauzo yako.\n\n<button class="btn-primary" style="margin-top:12px;" onclick="navigateTo('calculator')">Nenda kwenye Kikokotoo</button>`
+            : `<strong>Short Answer:</strong> Your tax depends on your annual turnover. For turnover below TZS 4,000,000, you pay no tax under the presumptive tax system.\n\n<strong>Recommended Steps:</strong>\n- Gather all your sales records.\n- Determine your total annual turnover.\n- Use our interactive calculator for a precise estimate.\n\n<i class="fa-solid fa-triangle-exclamation" style="color:var(--highlight)"></i> <strong>Warning:</strong> This is an estimate. Final tax obligations are subject to TRA assessment and verification.\n\n<button class="btn-primary" style="margin-top:12px;" onclick="navigateTo('calculator')">Go to Tax Calculator</button>`;
     } 
     else if (lowerMsg.includes('tin') || lowerMsg.includes('register') || lowerMsg.includes('sajili')) {
         return isSwahili 
-            ? "**Usajili wa TIN Mpya:**\nIli kufanya biashara yoyote au kulipa kodi Tanzania, unahitaji Namba ya Utambulisho wa Mlipakodi (TIN). \n\n**Hatua za Kufuata:**\n1. Tembelea mfumo wa TRA e-Service au ofisi yoyote ya TRA iliyo karibu nawe.\n2. Hakikisha una Kitambulisho chako cha Taifa (NIDA).\n3. Jaza fomu ya maombi mtandaoni au ofisini.\n4. Usajili wa TIN ni **BURE KABISA**. Epuka matapeli wanaokuomba pesa kwa ajili ya usajili wa TIN."
-            : "**Registering for a New TIN:**\nTo participate in any business or pay taxes in Tanzania, you are required to have a Taxpayer Identification Number (TIN). \n\n**Steps to Register:**\n1. Visit the TRA e-Service portal online or any nearby TRA branch.\n2. Ensure you have a valid National ID (NIDA).\n3. Fill out the application form online or in person.\n4. TIN Registration is **COMPLETELY FREE**. Please do not pay anyone claiming to charge for TIN registration.";
+            ? `<strong>Jibu Fupi:</strong> Kila mfanyabiashara anahitaji TIN. Unaweza kusajili TIN mtandaoni kupitia TRA e-Services au ofisi ya TRA.\n\n<strong>Hatua za Kufuata:</strong>\n- Andaa Kitambulisho chako cha NIDA.\n- Andaa mkataba wa pango au hati ya umiliki wa eneo la biashara.\n- Jaza fomu ya maombi mtandaoni au nenda ofisi ya TRA iliyo karibu.\n\n<i class="fa-solid fa-triangle-exclamation" style="color:var(--highlight)"></i> <strong>Tahadhari:</strong> Usajili wa TIN ni BURE. Usikubali kulipishwa na matapeli.\n\n<button class="btn-primary" style="margin-top:12px;" onclick="window.open('https://www.tra.go.tz', '_blank')">Tembelea Tovuti ya TRA</button>`
+            : `<strong>Short Answer:</strong> Every business owner needs a TIN. You can register online via TRA e-Services or at any TRA branch.\n\n<strong>Recommended Steps:</strong>\n- Prepare your National ID (NIDA).\n- Prepare your lease agreement or title deed for the business premises.\n- Fill out the application form online or visit a TRA office.\n\n<i class="fa-solid fa-triangle-exclamation" style="color:var(--highlight)"></i> <strong>Warning:</strong> TIN registration is COMPLETELY FREE. Do not pay anyone for this service.\n\n<button class="btn-primary" style="margin-top:12px;" onclick="window.open('https://www.tra.go.tz', '_blank')">Visit TRA Website</button>`;
     } 
     else if (lowerMsg.includes('penalty') || lowerMsg.includes('penalties') || lowerMsg.includes('vat') || lowerMsg.includes('faini') || lowerMsg.includes('adhabu')) {
         return isSwahili
-            ? "**Faini za Kuchelewa:**\nNi muhimu sana kuwasilisha ritani zako kwa wakati ili kuepuka faini zisizokuwa za lazima. \n\n**Mfano kwa VAT:**\n- Kuchelewa kuwasilisha ritani ya VAT baada ya tarehe 20 ya mwezi inavutia faini ya **2.5% ya kodi inayodaiwa**, au TZS 100,000/=, kiasi chochote kile ambacho ni kikubwa zaidi kwa kila mwezi unaochelewa.\n- Kuchelewa kulipa kunavutia riba ya ziada (statutory rate) inayohesabiwa kila siku.\n\nKama mfumo wa SmartTax unapendekeza, tafadhali weka 'Reminders' ziwake kwenye menyu ya kushoto ili usikose tarehe za mwisho!"
-            : "**Late Filing Penalties:**\nIt is crucial to file your returns on time to avoid unnecessary financial penalties. \n\n**Example for VAT:**\n- Failing to file your VAT return by the 20th of the month attracts a penalty of **2.5% of the tax due**, or TZS 100,000/=, whichever is higher, for every month it is delayed.\n- Late payments also attract daily statutory interest.\n\nI highly recommend using the 'Deadlines' calendar on the left menu of this SmartTax portal to keep track of your due dates and avoid these fines!";
+            ? `<strong>Jibu Fupi:</strong> Kuchelewa kuwasilisha ritani kunavutia faini. Kwa VAT, faini ni 2.5% ya kodi au TZS 100,000 (kiasi kikubwa zaidi).\n\n<strong>Hatua za Kufuata:</strong>\n- Jua tarehe za mwisho za kuwasilisha (mf. tarehe 20 kwa VAT).\n- Weka vikumbusho kwenye mfumo huu.\n- Wasilisha hata kama huna mauzo (Nil Return).\n\n<i class="fa-solid fa-triangle-exclamation" style="color:var(--highlight)"></i> <strong>Tahadhari:</strong> Riba huongezeka kila siku kwa kodi ambayo haijalipwa.\n\n<button class="btn-primary" style="margin-top:12px;" onclick="navigateTo('reminders')">Nenda kwenye Vikumbusho</button>`
+            : `<strong>Short Answer:</strong> Late filing attracts penalties. For VAT, it's 2.5% of tax due or TZS 100,000 (whichever is higher) per month.\n\n<strong>Recommended Steps:</strong>\n- Know your deadlines (e.g., 20th for VAT).\n- Set automated reminders in this portal.\n- File a 'Nil Return' even if you had no sales.\n\n<i class="fa-solid fa-triangle-exclamation" style="color:var(--highlight)"></i> <strong>Warning:</strong> Statutory interest accrues daily on unpaid taxes.\n\n<button class="btn-primary" style="margin-top:12px;" onclick="navigateTo('reminders')">Go to Deadlines Calendar</button>`;
     }
     else if (lowerMsg.includes('efd') || lowerMsg.includes('receipt') || lowerMsg.includes('risiti')) {
         return isSwahili
-            ? "**Kuhusu Virtual EFD:**\nHauhitaji tena kununua mashine za EFD za bei ghali. Mfumo huu una 'Virtual EFD' inayoruhusu kutoa e-Risiti moja kwa moja.\n\n1. Nenda kwenye tab ya **'Virtual EFD (e-Receipt)'** kwenye menyu ya kushoto.\n2. Weka jina la mteja, maelezo, na kiasi cha pesa.\n3. Bofya 'Tengeneza Risiti'. Mfumo utatoa risiti yenye namba ya kipekee na QR Code kwa ajili ya uhakiki na TRA.\n\nHii ni rahisi, ya haraka, na inakidhi matakwa ya kisheria ya TRA!"
-            : "**About Virtual EFDs:**\nYou no longer need to purchase expensive hardware EFD machines. This portal includes a built-in 'Virtual EFD' feature.\n\n1. Simply navigate to the **'Virtual EFD (e-Receipt)'** tab on the left sidebar.\n2. Enter your customer's name, the item description, and the amount.\n3. Click 'Generate e-Receipt'. The system instantly creates a legally binding receipt complete with a unique Receipt ID and a verification QR Code.\n\nIt is entirely compliant with TRA regulations and works directly from your phone or PC!";
+            ? `<strong>Jibu Fupi:</strong> Mfumo huu una Virtual EFD inayokuwezesha kutoa e-Risiti moja kwa moja bila mashine.\n\n<strong>Hatua za Kufuata:</strong>\n- Bofya kitufe cha Virtual EFD.\n- Weka jina la mteja na kiasi.\n- Bofya Tengeneza Risiti.\n\n<button class="btn-primary" style="margin-top:12px;" onclick="navigateTo('efd')">Nenda kwenye Virtual EFD</button>`
+            : `<strong>Short Answer:</strong> This prototype includes a Virtual EFD feature that lets you issue e-Receipts directly from your device.\n\n<strong>Recommended Steps:</strong>\n- Click on the Virtual EFD tool.\n- Enter customer details and the amount.\n- Click Generate e-Receipt.\n\n<button class="btn-primary" style="margin-top:12px;" onclick="navigateTo('efd')">Go to Virtual EFD</button>`;
     }
     else if (lowerMsg.includes('file') || lowerMsg.includes('return') || lowerMsg.includes('ritani') || lowerMsg.includes('wasilisha')) {
         return isSwahili
-            ? "**Kuwasilisha Ritani:**\nKila mlipakodi anapaswa kuwasilisha ritani zake kwa usahihi na wakati. Unaweza kufanya hivi mtandaoni kupitia TRA e-Filing system.\n\n**Tarehe Muhimu:**\n- **VAT (Kodi ya Ongezeko la Thamani):** Mwisho wa kuwasilisha ni tarehe 20 ya mwezi unaofuata.\n- **PAYE (Kodi ya Mishahara):** Mwisho wa kuwasilisha ni tarehe 7 ya mwezi unaofuata.\n\nJe, unataka nikusaidie kuandaa kumbukumbu zako za mauzo kwa ajili ya ritani ya mwezi huu?"
-            : "**Filing Tax Returns:**\nEvery registered taxpayer must file their tax returns accurately and on time via the TRA e-Filing system.\n\n**Crucial Deadlines:**\n- **VAT (Value Added Tax):** Returns and payments are due on the 20th of the following month.\n- **PAYE (Pay As You Earn):** Returns are due by the 7th of the following month.\n\nWould you like me to help you organize your revenue records so you are prepared to file this month's return?";
-    }
-    else if (lowerMsg.includes('ussd') || lowerMsg.includes('sssd') || lowerMsg.includes('mobile money') || lowerMsg.includes('lipa')) {
-        return isSwahili
-            ? "**Jinsi ya Kulipa Kodi kwa USSD (Simu):**\nKulipa kodi ni rahisi sana na unaweza kutumia simu yako ya mkononi (M-Pesa, Tigo Pesa, Airtel Money) kupitia Mfumo wa GePG.\n\n**Hatua za Kulipa:**\n1. Andaa *Control Number* yako (Namba ya Malipo) uliyopewa na TRA.\n2. Kwenye simu yako, piga **\*152\*00#**.\n3. Chagua **4 (Malipo)**.\n4. Chagua Mtandao wako wa simu (Kama M-Pesa au Tigo Pesa).\n5. Ingiza *Control Number* yako.\n6. Weka Namba ya Siri kuthibitisha.\n\nRisiti ya TRA itatumwa kwa njia ya SMS mara tu malipo yakikamilika!"
-            : "**How to Pay Taxes via USSD (Mobile Money):**\nPaying your taxes is extremely convenient and can be done from any basic mobile phone using M-Pesa, Tigo Pesa, or Airtel Money via the GePG system.\n\n**Steps to Pay:**\n1. Obtain your 12-digit **Control Number** from TRA.\n2. On your phone dialer, type **\*152\*00#**.\n3. Select Option **4 (Payments/Malipo)**.\n4. Choose your mobile network provider.\n5. Enter your TRA Control Number.\n6. Enter your Mobile Money PIN to confirm the transaction.\n\nYou will instantly receive a TRA clearance receipt via SMS!";
+            ? `<strong>Jibu Fupi:</strong> Unaweza kuwasilisha ritani zako kupitia mfumo wa TRA e-Filing mtandaoni.\n\n<strong>Hatua za Kufuata:</strong>\n- Andaa taarifa zote za mauzo kupitia sehemu ya AI Receipt Scan.\n- Ingia kwenye TRA e-Filing system.\n- Jaza na uthibitishe kiasi.\n\n<button class="btn-primary" style="margin-top:12px;" onclick="navigateTo('records')">Nenda kwenye AI Receipt Scan</button>`
+            : `<strong>Short Answer:</strong> You must file your tax returns accurately through the TRA e-Filing system.\n\n<strong>Recommended Steps:</strong>\n- Organize your revenue records using our AI Receipt Scan tool.\n- Log in to the official TRA e-Filing system.\n- Enter your summary and submit.\n\n<button class="btn-primary" style="margin-top:12px;" onclick="navigateTo('records')">Go to AI Receipt Scan</button>`;
     }
     else {
         return isSwahili
-            ? "Hilo ni swali zuri sana. Mimi ni AI msaidizi wa mfumo huu niliyebuniwa kurahisisha mambo yote yanayohusu kodi nchini Tanzania. Je, unataka nikusaidie kujisajili na TIN, au labda nikuonyeshe jinsi ya kutumia Virtual EFD?"
-            : "That's an excellent question! I am the SmartTax AI assistant designed to simplify all tax matters here in Tanzania. Would you like me to guide you through TIN registration, or perhaps show you how to generate a Virtual EFD receipt?";
+            ? `<strong>Jibu Fupi:</strong> Mimi ni KodiRahisi AI. Naweza kukusaidia kujua kodi, kusajili TIN, na kuandaa rekodi zako.\n\n<strong>Hatua za Kufuata:</strong>\n- Uliza swali lolote kuhusu kodi.\n- Piga picha ya risiti uipange.\n- Tengeneza risiti ya EFD mtandaoni.\n\n<button class="btn-primary" style="margin-top:12px;" onclick="navigateTo('dashboard')">Rudi kwenye Dashboard</button>`
+            : `<strong>Short Answer:</strong> I am KodiRahisi AI. I can assist you with estimating taxes, understanding TIN registration, and organizing your records.\n\n<strong>Recommended Steps:</strong>\n- Ask me any tax-related question.\n- Use the receipt scanner to organize your expenses.\n- Generate an e-receipt using Virtual EFD.\n\n<button class="btn-primary" style="margin-top:12px;" onclick="navigateTo('dashboard')">Back to Dashboard</button>`;
     }
 }
 
@@ -609,6 +707,29 @@ function generateReceipt() {
 
     // Show Preview
     document.getElementById('efd-preview').style.display = 'block';
+}
+// Proposal Tabs Logic
+function switchProposalTab(tabId) {
+    // Hide all tabs
+    document.querySelectorAll('.proposal-tab-content').forEach(tab => {
+        tab.style.display = 'none';
+    });
+    
+    // Remove active state from all buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.style.borderBottom = '3px solid transparent';
+        btn.style.color = 'var(--text-muted)';
+        btn.classList.remove('active');
+    });
+    
+    // Show selected tab
+    document.getElementById(`tab-${tabId}`).style.display = 'block';
+    
+    // Set active state on clicked button
+    const activeBtn = event.currentTarget;
+    activeBtn.style.borderBottom = '3px solid var(--primary-accent)';
+    activeBtn.style.color = 'var(--primary-accent)';
+    activeBtn.classList.add('active');
 }
 
 // Initialization on load
@@ -686,8 +807,10 @@ function navigateTo(targetId) {
 
     // Close mobile sidebar if it's open
     const sidebar = document.querySelector('.sidebar-secondary');
+    const overlay = document.getElementById('mobile-overlay');
     if (sidebar && sidebar.classList.contains('mobile-active')) {
         sidebar.classList.remove('mobile-active');
+        if (overlay) overlay.classList.remove('active');
     }
 }
 
@@ -695,15 +818,34 @@ function simulateScan() {
     const file = document.getElementById('file-upload').files[0];
     if(!file) return;
 
+    document.getElementById('upload-container').style.display = 'none';
+    document.getElementById('receipt-preview-container').style.display = 'block';
+    
     document.getElementById('empty-state').style.display = 'none';
-    document.getElementById('scan-table').style.display = 'none';
+    document.getElementById('scan-details').style.display = 'none';
+    document.getElementById('success-state').style.display = 'none';
+    
     const loader = document.getElementById('scan-loading');
     loader.style.display = 'block';
 
     setTimeout(() => {
         loader.style.display = 'none';
-        document.getElementById('scan-table').style.display = 'table';
+        document.getElementById('scan-details').style.display = 'block';
     }, 2500); // simulate 2.5s AI processing time
+}
+
+function confirmReceipt() {
+    document.getElementById('scan-details').style.display = 'none';
+    document.getElementById('success-state').style.display = 'block';
+}
+
+function resetScan() {
+    document.getElementById('file-upload').value = '';
+    document.getElementById('receipt-preview-container').style.display = 'none';
+    document.getElementById('success-state').style.display = 'none';
+    document.getElementById('scan-details').style.display = 'none';
+    document.getElementById('upload-container').style.display = 'block';
+    document.getElementById('empty-state').style.display = 'block';
 }
 
 // Landing Page & Mobile Menu Logic
@@ -727,7 +869,14 @@ function launchApp() {
 
 function toggleMobileMenu() {
     const sidebar = document.querySelector('.sidebar-secondary');
+    const overlay = document.getElementById('mobile-overlay');
+    
     if (sidebar) {
         sidebar.classList.toggle('mobile-active');
+        if (sidebar.classList.contains('mobile-active')) {
+            overlay.classList.add('active');
+        } else {
+            overlay.classList.remove('active');
+        }
     }
 }

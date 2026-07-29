@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRA SmartTax - Premium AI</title>
+    <meta name="description" content="KodiRahisi AI: An intelligent tax assistant prototype proposed for Tanzania's micro and small businesses. Simplifies TIN registration, presumptive tax calculations, and e-Receipt generation.">
+    <title>KodiRahisi AI - Prototype</title>
     <link rel="stylesheet" href="styles.css">
     <!-- Clean, modern typeface similar to ChatGPT/Gemini/SaaS -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,22 +19,106 @@
             <div class="landing-logo">
                 <i class="fa-solid fa-bolt" style="color: var(--primary-accent); font-size: 3rem; margin-bottom: 24px;"></i>
             </div>
-            <h1 class="landing-title">Welcome to TRA SmartTax</h1>
-            <p class="landing-subtitle">The Future of Tax in Tanzania. Powered by AI, designed for simplicity, and built to empower every taxpayer.</p>
-            <button class="btn-primary landing-btn" onclick="launchApp()">
-                Launch Dashboard <i class="fa-solid fa-arrow-right"></i>
-            </button>
+            <h1 class="landing-title">Tax compliance made simpler for every small business.</h1>
+            <p class="landing-subtitle">KodiRahisi AI helps Tanzanian entrepreneurs record transactions, understand tax obligations, scan receipts and prepare accurate tax summaries using Kiswahili, English, voice and low-data channels.</p>
+            <div class="landing-actions" style="display: flex; gap: 16px; justify-content: center;">
+                <button class="btn-primary landing-btn" onclick="launchApp()">
+                    Explore the Prototype <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+            <div style="margin-top: 40px; font-size: 0.85rem; color: var(--text-muted); opacity: 0.8;">
+                <p><strong>Independent innovation prototype</strong> proposed for consideration by the Tanzania Revenue Authority.</p>
+                <p>This demonstration is not an official TRA production system.</p>
+            </div>
+        </div>
+
+        <!-- 3 Benefit Cards -->
+        <div class="landing-section">
+            <div class="benefit-grid">
+                <div class="benefit-card">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <h3>Simpler compliance</h3>
+                    <p>Plain-language guidance and reminders in Kiswahili and English.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fa-solid fa-receipt"></i>
+                    <h3>Better records</h3>
+                    <p>Convert receipts and daily transactions into organized records.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <h3>Improved revenue</h3>
+                    <p>Help more micro-businesses file accurately and on time.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Challenge -->
+        <div id="problem-section" class="landing-section">
+            <h2>The Problem We Are Solving</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; color: var(--text-muted); line-height: 1.6;">
+                Many micro and small businesses may face difficulties such as inconsistent business records, limited understanding of tax procedures, missed filing deadlines, difficulty separating business and personal transactions, limited access to professional tax advice, language and digital-literacy barriers, and time-consuming manual processes.
+            </p>
+            
+            <div class="problem-comparison">
+                <div class="problem-col col-before">
+                    <h3>Current Experience</h3>
+                    <ul class="comparison-list">
+                        <li><i class="fa-solid fa-xmark"></i> Paper receipts become lost</li>
+                        <li><i class="fa-solid fa-xmark"></i> Complicated tax terminology</li>
+                        <li><i class="fa-solid fa-xmark"></i> Deadlines are forgotten</li>
+                        <li><i class="fa-solid fa-xmark"></i> Records are assembled late</li>
+                        <li><i class="fa-solid fa-xmark"></i> Routine questions require assistance</li>
+                    </ul>
+                </div>
+                <div class="problem-col col-after">
+                    <h3>With KodiRahisi AI</h3>
+                    <ul class="comparison-list">
+                        <li><i class="fa-solid fa-check"></i> Receipts are photographed and organized</li>
+                        <li><i class="fa-solid fa-check"></i> Plain Kiswahili or English explanations</li>
+                        <li><i class="fa-solid fa-check"></i> Personalized reminders</li>
+                        <li><i class="fa-solid fa-check"></i> Daily records create monthly summaries</li>
+                        <li><i class="fa-solid fa-check"></i> AI handles basic guidance immediately</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- How it works workflow -->
+        <div class="landing-section">
+            <h2>How It Works</h2>
+            <div class="workflow-steps">
+                <div class="step-card">
+                    <h3><span class="step-num">1</span> Capture</h3>
+                    <p>Record a sale, expense or receipt using your phone's camera.</p>
+                </div>
+                <div class="step-card">
+                    <h3><span class="step-num">2</span> Understand</h3>
+                    <p>AI extracts and explains the information instantly.</p>
+                </div>
+                <div class="step-card">
+                    <h3><span class="step-num">3</span> Review</h3>
+                    <p>The taxpayer checks the records and estimated obligation.</p>
+                </div>
+                <div class="step-card">
+                    <h3><span class="step-num">4</span> Comply</h3>
+                    <p>Review and continue to submission through the appropriate TRA service.</p>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Main Application (Hidden initially) -->
     <div class="app-container" id="main-app" style="display: none;">
         
+        <!-- Mobile Overlay -->
+        <div id="mobile-overlay" class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+
         <!-- Top Navbar -->
         <header class="top-navbar">
             <div class="logo-area">
                 <i class="fa-solid fa-bars mobile-menu-btn" onclick="toggleMobileMenu()"></i>
-                <h1>TRA SmartTax</h1>
+                <h1>KodiRahisi AI</h1>
             </div>
             
             <div class="search-area">
@@ -67,6 +152,10 @@
 
             <!-- Secondary Sidebar (Light Purple) -->
             <aside class="sidebar-secondary">
+                <div class="mobile-menu-header" style="display: none; justify-content: space-between; align-items: center; margin-bottom: 16px; padding: 0 16px;">
+                    <span style="font-weight: bold; color: var(--text-dark);">Menu</span>
+                    <i class="fa-solid fa-xmark" style="font-size: 1.5rem; cursor: pointer; color: var(--text-dark);" onclick="toggleMobileMenu()"></i>
+                </div>
                 <nav class="nav-menu">
                     <!-- Links matching the requested design (no icons, active is dark pill) -->
                     <a href="#" class="nav-item active" data-target="dashboard">
@@ -86,6 +175,9 @@
                     </a>
                     <a href="#" class="nav-item" data-target="reminders">
                         <span id="t-nav-deadlines">Deadlines</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="proposal" style="margin-top: 24px; border-top: 1px solid var(--border-color); padding-top: 16px;">
+                        <span id="t-nav-proposal">TRA Proposal Docs</span>
                     </a>
                 </nav>
 
@@ -171,9 +263,46 @@
                 <!-- Dashboard Canvas -->
                 <section id="view-dashboard" class="view active">
                     <div class="dashboard-canvas">
+                        <div style="background: rgba(8, 126, 122, 0.1); color: var(--primary-accent); padding: 8px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; font-weight: 500; font-size: 0.85rem;" id="t-dash-demo-label">
+                            <i class="fa-solid fa-flask"></i> Prototype using illustrative demonstration data.
+                        </div>
+
                         <div class="dashboard-header">
-                            <h1 id="t-dash-title">Dashboard</h1>
-                            <p id="t-dash-subtitle">Your personalized tax summary</p>
+                            <h1 id="t-dash-title">Habari, Amina.</h1>
+                            <p id="t-dash-subtitle">Here is your tax readiness summary.</p>
+                        </div>
+
+                        <!-- Priority Action Panel -->
+                        <div class="priority-panel">
+                            <p id="t-dash-priority">Two receipts need confirmation before your monthly records are complete.</p>
+                            <button class="btn-primary" onclick="navigateTo('records')" style="white-space: nowrap;" id="t-dash-priority-btn">Review receipts</button>
+                        </div>
+
+                        <!-- Readiness Score & Recent Activity (Split Grid) -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 32px;">
+                            <div class="content-card">
+                                <h3 style="color: var(--primary-dark); margin-bottom: 16px;" id="t-dash-readiness-title">Monthly record readiness: 82%</h3>
+                                <div class="readiness-score">
+                                    <div class="score-circle">82%</div>
+                                    <div class="score-details">
+                                        <ul>
+                                            <li><i class="fa-solid fa-triangle-exclamation" style="color: var(--highlight);"></i> <span id="t-dash-score-1">Two unconfirmed receipts.</span></li>
+                                            <li><i class="fa-solid fa-triangle-exclamation" style="color: var(--highlight);"></i> <span id="t-dash-score-2">One week without sales records.</span></li>
+                                            <li><i class="fa-solid fa-circle-check" style="color: var(--primary-accent);"></i> <span id="t-dash-score-3">Business profile complete.</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="content-card">
+                                <h3 style="color: var(--primary-dark); margin-bottom: 16px;" id="t-dash-activity-title">Recent Activity</h3>
+                                <ul class="recent-activity-list">
+                                    <li><i class="fa-solid fa-receipt"></i> <span id="t-dash-act-1">Receipt added</span></li>
+                                    <li><i class="fa-solid fa-pen-to-square"></i> <span id="t-dash-act-2">Expense corrected</span></li>
+                                    <li><i class="fa-solid fa-calendar-plus"></i> <span id="t-dash-act-3">Deadline reminder created</span></li>
+                                    <li><i class="fa-solid fa-eye"></i> <span id="t-dash-act-4">Monthly summary reviewed</span></li>
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="dashboard-grid">
@@ -190,11 +319,16 @@
                             <div class="stat-card">
                                 <div class="stat-icon" style="color: #8B5CF6;"><i class="fa-solid fa-receipt"></i></div>
                                 <div class="stat-value">142</div>
-                                <div class="stat-label" id="t-dash-receipts">Receipts Issued</div>
+                                <div class="stat-label" id="t-dash-receipts">Receipts Recorded</div>
+                            </div>
+                            <div class="stat-card" style="border: 1px solid var(--highlight);">
+                                <div class="stat-icon" style="color: var(--highlight);"><i class="fa-solid fa-file-circle-exclamation"></i></div>
+                                <div class="stat-value">2</div>
+                                <div class="stat-label" id="t-dash-review">Records requiring review</div>
                             </div>
                         </div>
                         
-                        <!-- Chart area - Styled like the cards in the image -->
+                        <!-- Chart area -->
                         <div class="content-card" style="margin-top: 40px;">
                             <h3 style="margin-bottom: 20px;" id="t-chart-title">Revenue vs Estimated Tax (2026)</h3>
                             <canvas id="taxChart" height="100"></canvas>
@@ -228,10 +362,20 @@
                                 <i class="fa-solid fa-calculator"></i> Calculate Tax
                             </button>
 
-                            <div id="calc-result" class="result-box" style="display: none;">
-                                <h3 style="color: #10B981; margin-bottom: 8px;" id="t-calc-res-title">Estimated Tax Due</h3>
-                                <div id="calc-amount" style="font-size: 2.5rem; font-weight: 700; color: var(--text-dark);">TZS 0</div>
-                                <p style="color: var(--text-muted); margin-top: 4px;" id="calc-breakdown">Based on presumptive tax brackets.</p>
+                            <div id="calc-result" class="result-box" style="display: none; background: var(--secondary-sidebar-bg); padding: 24px; border-radius: 12px; margin-top: 24px; border: 1px solid var(--border-color);">
+                                <h3 style="color: var(--primary-dark); margin-bottom: 16px;" id="t-calc-res-title">Tax Estimate</h3>
+                                
+                                <div id="calc-explanation" style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 24px; line-height: 1.6;">
+                                    Because your turnover is under 11M, you qualify for presumptive tax. Your estimated obligation is <strong style="color: var(--primary-accent);">0 TZS</strong>.
+                                </div>
+                                
+                                <div style="background: rgba(229, 167, 45, 0.15); border-left: 4px solid var(--highlight); padding: 12px 16px; border-radius: 4px; display: flex; gap: 12px; align-items: flex-start;">
+                                    <i class="fa-solid fa-triangle-exclamation" style="color: var(--highlight); margin-top: 2px;"></i>
+                                    <div>
+                                        <h4 style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 4px;" id="t-calc-warn-title">Estimate Warning</h4>
+                                        <p style="font-size: 0.85rem; color: var(--text-muted);" id="t-calc-warn-text">This is an estimate based on provided figures. Final tax obligations are subject to official TRA review and assessment.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -245,12 +389,24 @@
                             <p id="t-records-sub">Upload a receipt and let AI extract the data for your records.</p>
                         </div>
                         
-                        <div style="display: flex; gap: 24px; flex-wrap: wrap;">
-                            <div class="upload-zone" onclick="document.getElementById('file-upload').click()">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                            <div class="upload-zone" onclick="document.getElementById('file-upload').click()" id="upload-container">
                                 <input type="file" id="file-upload" style="display: none;" accept="image/*,.pdf" onchange="simulateScan()">
-                                <i class="fa-solid fa-cloud-arrow-up" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 16px;"></i>
-                                <h3 id="t-upload-title" style="margin-bottom: 8px;">Click to Upload Receipt</h3>
-                                <p style="color: var(--text-muted); font-size: 0.9rem;">Supports JPG, PNG, PDF</p>
+                                <i class="fa-solid fa-camera" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 16px;"></i>
+                                <h3 id="t-upload-title" style="margin-bottom: 8px;">Tap to capture receipt</h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">or upload an image</p>
+                            </div>
+
+                            <!-- Preview of the uploaded receipt (hidden initially) -->
+                            <div id="receipt-preview-container" style="display: none; background: #fff; padding: 20px; border: 1px solid var(--border-color); border-radius: 12px; text-align: center;">
+                                <div style="width: 200px; height: 250px; background: #f9f9f9; border: 1px dashed #ccc; margin: 0 auto 16px auto; position: relative; padding: 20px; box-shadow: 2px 2px 5px rgba(0,0,0,0.05);">
+                                    <h4 style="margin-bottom: 10px; font-family: monospace;">TANESCO</h4>
+                                    <p style="font-family: monospace; font-size: 10px; color: #666;">RECEIPT: #982347</p>
+                                    <p style="font-family: monospace; font-size: 10px; color: #666;">DATE: 12 AUG 2026</p>
+                                    <hr style="border: 0; border-top: 1px dashed #ccc; margin: 10px 0;">
+                                    <p style="font-family: monospace; font-size: 14px; font-weight: bold; margin-top: 40px;">TZS 50,000</p>
+                                </div>
+                                <p style="font-size: 0.9rem; color: var(--text-muted);"><i class="fa-solid fa-check-circle" style="color: var(--primary-accent);"></i> Image captured successfully</p>
                             </div>
 
                             <div class="content-card scan-results">
@@ -260,24 +416,35 @@
                                 
                                 <div id="scan-loading" style="display: none; text-align: center; padding: 40px;">
                                     <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; color: var(--primary-accent); margin-bottom: 16px;"></i>
-                                    <p style="color: var(--text-muted);">AI is analyzing the receipt...</p>
+                                    <p style="color: var(--text-muted);">AI is extracting details from the receipt...</p>
                                 </div>
 
-                                <table id="scan-table" class="data-table" style="display: none;">
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Merchant</th>
-                                        <th>Category</th>
-                                        <th>Amount (TZS)</th>
-                                    </tr>
-                                    <tr>
-                                        <td>2026-07-28</td>
-                                        <td>Stationery Plus Ltd</td>
-                                        <td><span class="badge">Office Supplies</span></td>
-                                        <td style="font-weight: 600;">125,000</td>
-                                    </tr>
-                                </table>
+                                <div id="scan-details" style="display: none;">
+                                    <ul style="list-style: none; margin-bottom: 24px;">
+                                        <li style="padding: 12px 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+                                            <span style="color: var(--text-muted);">Date:</span> <strong>12 Aug 2026</strong>
+                                        </li>
+                                        <li style="padding: 12px 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+                                            <span style="color: var(--text-muted);">Seller:</span> <strong>Tanesco</strong>
+                                        </li>
+                                        <li style="padding: 12px 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+                                            <span style="color: var(--text-muted);">Total Amount:</span> <strong>TZS 50,000</strong>
+                                        </li>
+                                        <li style="padding: 12px 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+                                            <span style="color: var(--text-muted);">Extracted VAT:</span> <strong style="color: var(--primary-accent);">TZS 7,627</strong>
+                                        </li>
+                                    </ul>
+                                    
+                                    <button class="btn-primary" style="width: 100%;" onclick="confirmReceipt()" id="t-scan-confirm">Confirm and save to records</button>
+                                </div>
                                 <p id="empty-state" style="color: var(--text-muted); text-align: center; padding: 40px;">No receipt uploaded yet.</p>
+                                
+                                <div id="success-state" style="display: none; text-align: center; padding: 40px;">
+                                    <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: #10B981; margin-bottom: 16px;"></i>
+                                    <h3 style="color: #10B981;">Record Saved</h3>
+                                    <p style="color: var(--text-muted); margin-top: 8px;">Your monthly tax summary has been updated.</p>
+                                    <button class="btn-secondary" style="margin-top: 16px; padding: 8px 16px; background: transparent; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer;" onclick="resetScan()">Scan another receipt</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -390,6 +557,77 @@
                                     <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;" onclick="alert('PDF Downloaded!')">
                                         <i class="fa-solid fa-download"></i> Download PDF
                                     </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- TRA Proposal View -->
+                <section id="view-proposal" class="view">
+                    <div class="dashboard-canvas">
+                        <div class="dashboard-header">
+                            <h1 id="t-prop-title">TRA Proposal Documentation</h1>
+                            <p id="t-prop-sub">Business case, implementation roadmap, and security compliance.</p>
+                        </div>
+                        
+                        <div class="content-card">
+                            <div class="tabs-container" style="display: flex; gap: 16px; border-bottom: 1px solid var(--border-color); margin-bottom: 24px;">
+                                <button class="tab-btn active" onclick="switchProposalTab('impact')" style="background: none; border: none; padding: 12px 16px; cursor: pointer; font-weight: bold; border-bottom: 3px solid var(--primary-accent); color: var(--primary-accent);">Proposed Impact for TRA</button>
+                                <button class="tab-btn" onclick="switchProposalTab('pilot')" style="background: none; border: none; padding: 12px 16px; cursor: pointer; font-weight: bold; border-bottom: 3px solid transparent; color: var(--text-muted);">Pilot & Implementation</button>
+                                <button class="tab-btn" onclick="switchProposalTab('security')" style="background: none; border: none; padding: 12px 16px; cursor: pointer; font-weight: bold; border-bottom: 3px solid transparent; color: var(--text-muted);">Security & Data Privacy</button>
+                            </div>
+
+                            <!-- Tab 1: Impact -->
+                            <div id="tab-impact" class="proposal-tab-content">
+                                <h2 style="color: var(--primary-dark); margin-bottom: 16px;">Strategic Impact on Tax Administration</h2>
+                                <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.8; color: var(--text-dark);">
+                                    <li><strong>Increased Tax Compliance:</strong> By simplifying tax calculation and record-keeping through an intuitive AI interface, small business owners are empowered to comply voluntarily, reducing accidental evasion caused by complexity.</li>
+                                    <li><strong>Reduction of the Informal Sector:</strong> The barrier to entry for formalization is lowered. Free TIN registration guidance and Virtual EFD capabilities encourage informal traders to register and operate formally.</li>
+                                    <li><strong>Reduced Administrative Costs:</strong> The AI Assistant serves as a first-line support agent, dramatically decreasing the volume of routine queries to TRA call centers and branch offices.</li>
+                                    <li><strong>Data-Driven Insights:</strong> Automated receipt scanning and digital records provide TRA with structured, verifiable data, enhancing audit capabilities and economic forecasting.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Tab 2: Pilot -->
+                            <div id="tab-pilot" class="proposal-tab-content" style="display: none;">
+                                <h2 style="color: var(--primary-dark); margin-bottom: 16px;">Implementation Roadmap</h2>
+                                <div style="display: grid; gap: 16px;">
+                                    <div style="background: var(--main-bg); padding: 16px; border-left: 4px solid var(--primary-accent); border-radius: 4px;">
+                                        <h4 style="margin-bottom: 8px;">Month 1: Prototype Refinement & API Design</h4>
+                                        <p style="color: var(--text-muted); font-size: 0.95rem;">Finalize the UI/UX based on TRA stakeholder feedback. Design secure API endpoints for integration with existing TRA databases.</p>
+                                    </div>
+                                    <div style="background: var(--main-bg); padding: 16px; border-left: 4px solid #F59E0B; border-radius: 4px;">
+                                        <h4 style="margin-bottom: 8px;">Month 2-3: GePG & e-Filing Integration</h4>
+                                        <p style="color: var(--text-muted); font-size: 0.95rem;">Securely connect the platform to the Government e-Payment Gateway (GePG) for instant tax payments and the TRA e-Filing system for automated returns.</p>
+                                    </div>
+                                    <div style="background: var(--main-bg); padding: 16px; border-left: 4px solid #10B981; border-radius: 4px;">
+                                        <h4 style="margin-bottom: 8px;">Month 4-6: Controlled Rollout</h4>
+                                        <p style="color: var(--text-muted); font-size: 0.95rem;">Launch a pilot program targeting 5,000 SME users in Dar es Salaam. Monitor server loads, gather user feedback, and measure compliance uplift.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tab 3: Security -->
+                            <div id="tab-security" class="proposal-tab-content" style="display: none;">
+                                <h2 style="color: var(--primary-dark); margin-bottom: 16px;">Security & Compliance Architecture</h2>
+                                <p style="margin-bottom: 16px; color: var(--text-dark); line-height: 1.6;">We recognize that taxpayer data is highly sensitive. KodiRahisi AI is designed from the ground up to exceed government security requirements.</p>
+                                
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                                    <div style="border: 1px solid var(--border-color); padding: 20px; border-radius: 8px;">
+                                        <i class="fa-solid fa-lock" style="font-size: 2rem; color: #10B981; margin-bottom: 12px;"></i>
+                                        <h4 style="margin-bottom: 8px;">End-to-End Encryption</h4>
+                                        <p style="font-size: 0.9rem; color: var(--text-muted);">All data in transit (TLS 1.3) and at rest (AES-256) is fully encrypted to prevent unauthorized access.</p>
+                                    </div>
+                                    <div style="border: 1px solid var(--border-color); padding: 20px; border-radius: 8px;">
+                                        <i class="fa-solid fa-server" style="font-size: 2rem; color: #3B82F6; margin-bottom: 12px;"></i>
+                                        <h4 style="margin-bottom: 8px;">Local Data Residency</h4>
+                                        <p style="font-size: 0.9rem; color: var(--text-muted);">All databases and processing servers will be physically hosted within the United Republic of Tanzania.</p>
+                                    </div>
+                                    <div style="border: 1px solid var(--border-color); padding: 20px; border-radius: 8px;">
+                                        <i class="fa-solid fa-file-shield" style="font-size: 2rem; color: #8B5CF6; margin-bottom: 12px;"></i>
+                                        <h4 style="margin-bottom: 8px;">eGA Compliance</h4>
+                                        <p style="font-size: 0.9rem; color: var(--text-muted);">Strict adherence to the e-Government Authority (eGA) standards and the Tanzania Data Protection Act.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
