@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="KodiRahisi AI: an independent tax-assistance prototype for Tanzania's micro and small businesses. Demonstrates guided record-keeping, official-rule-linked presumptive tax estimates, receipt-review workflows and safe navigation to TRA services.">
     <title>KodiRahisi AI - Prototype</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2.1">
     <!-- Clean, modern typeface similar to ChatGPT/Gemini/SaaS -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -96,12 +96,12 @@
                 <article class="transparency-card status-working">
                     <span class="status-pill">INTERACTIVE NOW</span>
                     <h3>Working demo flows</h3>
-                    <p>Dashboard navigation, bilingual guidance, a TRA-rule-linked presumptive estimate, receipt-image preview, editable review fields and downloadable calendar reminders work in the browser.</p>
+                    <p>Receipt reading, confirmed records, live totals, CSV export, bilingual guidance, a TRA-linked estimate and downloadable calendar reminders work in the browser.</p>
                 </article>
                 <article class="transparency-card status-demo">
-                    <span class="status-pill">SIMULATED</span>
-                    <h3>AI / OCR demonstration</h3>
-                    <p>The public build demonstrates how AI assistance and receipt extraction could feel. It does not call a production AI model or send uploaded receipts to a server.</p>
+                    <span class="status-pill">ON-DEVICE</span>
+                    <h3>Receipt reading & guided help</h3>
+                    <p>Receipt text is read on this device and every field stays editable. Guidance uses curated responses; a production generative AI model and voice remain planned.</p>
                 </article>
                 <article class="transparency-card status-future">
                     <span class="status-pill">TRA APPROVAL REQUIRED</span>
@@ -121,7 +121,7 @@
                 </div>
                 <div class="step-card">
                     <h3><span class="step-num">2</span> Understand</h3>
-                    <p>The prototype demonstrates the proposed extraction-and-review flow; the taxpayer stays in control.</p>
+                    <p>Read the receipt, check the extracted fields and confirm the record. The taxpayer stays in control.</p>
                 </div>
                 <div class="step-card">
                     <h3><span class="step-num">3</span> Review</h3>
@@ -161,7 +161,7 @@
             <div class="action-icons">
                 <span class="prototype-top-badge" title="Independent prototype with no live TRA connection"><i class="fa-solid fa-flask"></i> Independent Prototype</span>
                 <button type="button" class="icon-button" aria-label="Prototype notice" title="Prototype status" onclick="showPrototypeNotice('This is an independent innovation prototype. It has no live connection to taxpayer accounts, EFD issuance, payment or filing systems.')"><i class="fa-regular fa-bell"></i></button>
-                <a class="official-tra-link" href="https://identity.tra.go.tz/Account/Login" target="_blank" rel="noopener noreferrer" title="Open the official TRA Taxpayer Portal">Official TRA <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <a class="official-tra-link" href="https://taxpayersportal.tra.go.tz/" target="_blank" rel="noopener noreferrer" title="Open the official TRA Taxpayer Portal">Official TRA <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                 <div class="profile-pic" title="Illustrative taxpayer profile" style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #E1E0FA;">
                     <i class="fa-solid fa-user" style="color: #1A1C38; font-size: 14px;"></i>
                 </div>
@@ -175,7 +175,7 @@
 
         <div class="main-layout">
             <!-- Primary Sidebar (Thin, Dark) -->
-            <aside class="sidebar-primary">
+            <aside class="sidebar-primary" hidden>
                 <!-- Icons removed. Primary sidebar reserved for future top-level modules -->
             </aside>
 
@@ -313,77 +313,12 @@
                 <!-- Dashboard Canvas -->
                 <section id="view-dashboard" class="view active">
                     <div class="dashboard-canvas">
-                        <div style="background: rgba(8, 126, 122, 0.1); color: var(--primary-accent); padding: 8px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; font-weight: 500; font-size: 0.85rem;" id="t-dash-demo-label">
-                            <i class="fa-solid fa-flask"></i> Prototype using illustrative demonstration data.
-                        </div>
-
-                        <div class="dashboard-header">
-                            <h1 id="t-dash-title">Hello, Amina.</h1>
-                            <p id="t-dash-subtitle">Here is your illustrative tax-readiness summary.</p>
-                        </div>
-
-                        <!-- Priority Action Panel -->
-                        <div class="priority-panel">
-                            <p id="t-dash-priority">Two receipts need confirmation before your monthly records are complete.</p>
-                            <button type="button" class="btn-primary" onclick="navigateTo('records')" style="white-space: nowrap;" id="t-dash-priority-btn">Review receipts</button>
-                        </div>
-
-                        <!-- Readiness Score & Recent Activity (Split Grid) -->
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 32px;">
-                            <div class="content-card">
-                                <h3 style="color: var(--primary-dark); margin-bottom: 16px;" id="t-dash-readiness-title">Monthly record readiness: 82%</h3>
-                                <div class="readiness-score">
-                                    <div class="score-circle">82%</div>
-                                    <div class="score-details">
-                                        <ul>
-                                            <li><i class="fa-solid fa-triangle-exclamation" style="color: var(--highlight);"></i> <span id="t-dash-score-1">Two unconfirmed receipts.</span></li>
-                                            <li><i class="fa-solid fa-triangle-exclamation" style="color: var(--highlight);"></i> <span id="t-dash-score-2">One week without sales records.</span></li>
-                                            <li><i class="fa-solid fa-circle-check" style="color: var(--primary-accent);"></i> <span id="t-dash-score-3">Business profile complete.</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="content-card">
-                                <h3 style="color: var(--primary-dark); margin-bottom: 16px;" id="t-dash-activity-title">Recent Activity</h3>
-                                <ul class="recent-activity-list">
-                                    <li><i class="fa-solid fa-receipt"></i> <span id="t-dash-act-1">Receipt added</span></li>
-                                    <li><i class="fa-solid fa-pen-to-square"></i> <span id="t-dash-act-2">Expense corrected</span></li>
-                                    <li><i class="fa-solid fa-calendar-plus"></i> <span id="t-dash-act-3">Deadline reminder created</span></li>
-                                    <li><i class="fa-solid fa-eye"></i> <span id="t-dash-act-4">Monthly summary reviewed</span></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="dashboard-grid">
-                            <div class="stat-card">
-                                <div class="stat-icon" style="color: #3B82F6;"><i class="fa-solid fa-wallet"></i></div>
-                                <div class="stat-value">TZS 150,000</div>
-                                <div class="stat-label" id="t-dash-tax">Example Tax Estimate</div>
-                                <div class="stat-note">Illustrative: TZS 9m annual turnover with the applicable record-keeping requirement met.</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon" style="color: #10B981;"><i class="fa-regular fa-calendar-check"></i></div>
-                                <div class="stat-value">See calendar</div>
-                                <div class="stat-label" id="t-dash-deadline">Next Reminder</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon" style="color: #8B5CF6;"><i class="fa-solid fa-receipt"></i></div>
-                                <div class="stat-value">142</div>
-                                <div class="stat-label" id="t-dash-receipts">Demo Records</div>
-                            </div>
-                            <div class="stat-card" style="border: 1px solid var(--highlight);">
-                                <div class="stat-icon" style="color: var(--highlight);"><i class="fa-solid fa-file-circle-exclamation"></i></div>
-                                <div class="stat-value">2</div>
-                                <div class="stat-label" id="t-dash-review">Records requiring review</div>
-                            </div>
-                        </div>
-                        
-                        <!-- Chart area -->
-                        <div class="content-card" style="margin-top: 40px;">
-                            <h3 style="margin-bottom: 20px;" id="t-chart-title">Illustrative Quarterly Sales & Expenses (TZS)</h3>
-                            <canvas id="taxChart" height="100"></canvas>
-                        </div>
+                        <div class="section-kicker" id="t-dash-demo-label">Independent innovation prototype · device workspace</div>
+                        <div class="kr-page-heading"><div class="dashboard-header"><h1 id="t-dash-title">Good records. Less guesswork.</h1><p id="t-dash-subtitle">Your business activity, built from the records you confirm.</p></div><button type="button" class="btn-primary" data-kr="manual" id="kr-add">Add a record</button></div>
+                        <div class="dashboard-grid kr-metrics" id="kr-metrics" aria-live="polite"></div>
+                        <section class="content-card kr-ledger"><div class="kr-section-heading"><h2 id="kr-list-title">Your records</h2><button type="button" class="btn-secondary" data-kr="export" id="kr-export">Export records</button></div><div id="kr-record-list"></div></section>
+                        <section class="kr-guide-panel"><div><h3 id="kr-guide-title">Your next tax step, explained</h3><p id="kr-guide-copy">Review your records, check an estimate and continue through official TRA services.</p></div><button type="button" class="btn-secondary" onclick="navigateTo('assistant')" id="kr-guide-button">Open guidance</button></section>
+                        <p class="kr-update-note">Website update · 14 Sep 2026 · Submitted proposal retained</p>
                     </div>
                 </section>
 
@@ -406,18 +341,18 @@
                                     <input type="number" id="calc-revenue" min="0" step="1000" placeholder="e.g. 6500000" class="custom-input" inputmode="decimal">
                                 </div>
                                 <div>
-                                    <label for="calc-records">Business record status</label>
+                                    <label for="calc-records" id="kr-record-status">Business record status</label>
                                     <select id="calc-records" class="custom-input">
-                                        <option value="complete">Records meet the applicable record-keeping requirement</option>
-                                        <option value="incomplete">Records do not meet the applicable record-keeping requirement</option>
+                                        <option id="kr-complete" value="complete">Records meet the applicable record-keeping requirement</option>
+                                        <option id="kr-incomplete" value="incomplete">Records do not meet the applicable record-keeping requirement</option>
                                     </select>
                                 </div>
                             </div>
                             <label class="check-row">
                                 <input type="checkbox" id="calc-new-business">
-                                <span>First-time TIN for a new business? Show the current TRA relief note (eligibility still requires TRA approval).</span>
+                                <span id="kr-relief-label">First-time TIN for a new business? Show the TRA relief note; approval is still required.</span>
                             </label>
-                            <button type="button" onclick="calculateTax()" class="btn-primary" id="t-calc-btn">
+                            <label class="check-row"><input type="checkbox" id="calc-eligible"><span id="kr-eligible-label">I confirm this estimate is for an eligible resident individual business, using full-year turnover.</span></label><p class="kr-source-note"><a id="kr-current-source" href="https://www.tra.go.tz/page/income-tax-for-individuals" target="_blank" rel="noopener noreferrer">Rule source: TRA individual income-tax guidance · checked 14 Sep 2026</a></p><button type="button" onclick="calculateTax()" class="btn-primary" id="t-calc-btn">
                                 <i class="fa-solid fa-calculator"></i> Calculate indicative amount
                             </button>
 
@@ -452,16 +387,16 @@
                 <section id="view-records" class="view">
                     <div class="dashboard-canvas">
                         <div class="dashboard-header">
-                            <div class="section-kicker">HUMAN-IN-THE-LOOP DEMO</div><h1 id="t-records-title">Receipt Capture & Review</h1>
-                            <p id="t-records-sub">Preview a receipt locally, then test the proposed review workflow. This public build does not upload your file or run production OCR.</p>
+                            <div class="section-kicker">CAPTURE · REVIEW · CONFIRM</div><h1 id="t-records-title">Receipt Capture & Review</h1>
+                            <p id="t-records-sub">Read a receipt on your device, check its fields and save a confirmed record.</p>
                         </div>
                         
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
-                            <div class="upload-zone" onclick="document.getElementById('file-upload').click()" id="upload-container">
+                            <div class="upload-zone" id="upload-container">
                                 <input type="file" id="file-upload" style="display: none;" accept="image/*,.pdf" onchange="simulateScan()">
                                 <i class="fa-solid fa-camera" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 16px;"></i>
                                 <h3 id="t-upload-title" style="margin-bottom: 8px;">Tap to capture receipt</h3>
-                                <p style="color: var(--text-muted); font-size: 0.9rem;">or upload an image / PDF</p>
+                                <p style="color: var(--text-muted); font-size: 0.9rem;">JPG, PNG, WebP or one-page PDF · up to 8 MB</p><div class="kr-upload-actions"><button type="button" class="btn-primary" data-kr="upload">Choose a receipt</button><button type="button" class="btn-secondary" data-kr="sample">Try sample receipt</button><button type="button" class="kr-text-button" data-kr="manual">Enter manually</button></div>
                             </div>
 
                             <!-- Local preview of selected receipt (hidden initially) -->
@@ -479,30 +414,26 @@
                                 
                                 <div id="scan-loading" style="display: none; text-align: center; padding: 40px;">
                                     <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; color: var(--primary-accent); margin-bottom: 16px;"></i>
-                                    <p style="color: var(--text-muted);">Preparing the prototype review step...</p>
+                                    <p style="color: var(--text-muted);" id="kr-reading-status">Reading your receipt…</p>
                                 </div>
 
                                 <div id="scan-details" style="display:none;">
-                                    <div class="safety-banner warning compact">
-                                        <i class="fa-solid fa-flask"></i>
-                                        <div><strong>Demo extraction only.</strong> The values below are not read by OCR in this public build. Use “Load illustrative extraction” to demonstrate the proposed AI-review experience, then correct any field before saving.</div>
+                                    <div class="safety-banner warning compact"><div id="kr-extraction-status">Check every extracted field against the receipt before saving.</div></div>
+                                    <div class="review-fields"><label for="scan-type"><span id="kr-type-label">Transaction type</span><select id="scan-type" class="custom-input"><option id="kr-expense" value="expense">Expense · money out</option><option id="kr-sale" value="sale">Sale · money in</option></select></label><label for="scan-reference"><span id="kr-ref-label">Receipt reference</span><input id="scan-reference" class="custom-input" maxlength="80"></label>
+                                        <label for="scan-date"><span id="kr-date-label">Date</span><input id="scan-date" type="date" class="custom-input"></label>
+                                        <label for="scan-seller"><span id="kr-seller-label">Seller</span><input id="scan-seller" type="text" class="custom-input" maxlength="100" placeholder="Review / enter seller"></label>
+                                        <label for="scan-total"><span id="kr-total-label">Total amount (TZS)</span><input id="scan-total" type="number" class="custom-input" min="0" placeholder="Review / enter total"></label>
+                                        <label for="scan-tax"><span id="kr-tax-label">Tax shown on receipt (TZS)</span><input id="scan-tax" type="number" class="custom-input" min="0" placeholder="Optional"></label>
                                     </div>
-                                    <button type="button" class="btn-secondary demo-fill-btn" onclick="loadDemoExtraction()"><i class="fa-solid fa-wand-magic-sparkles"></i> Load illustrative extraction</button>
-                                    <div class="review-fields">
-                                        <label for="scan-date">Date<input id="scan-date" type="date" class="custom-input"></label>
-                                        <label for="scan-seller">Seller<input id="scan-seller" type="text" class="custom-input" maxlength="100" placeholder="Review / enter seller"></label>
-                                        <label for="scan-total">Total amount (TZS)<input id="scan-total" type="number" class="custom-input" min="0" placeholder="Review / enter total"></label>
-                                        <label for="scan-tax">Tax shown on receipt (TZS)<input id="scan-tax" type="number" class="custom-input" min="0" placeholder="Optional"></label>
-                                    </div>
-                                    <label class="check-row"><input type="checkbox" id="scan-confirmed"><span>I reviewed these fields and understand they are prototype data.</span></label>
-                                    <button type="button" class="btn-primary" style="width:100%;" onclick="confirmReceipt()" id="t-scan-confirm">Confirm demo record</button>
+                                    <label class="check-row"><input type="checkbox" id="scan-confirmed"><span id="kr-confirm-copy">I checked the date, party and amounts against the receipt.</span></label>
+                                    <p id="kr-feedback" class="kr-feedback" role="status" aria-live="polite"></p><button type="button" class="btn-primary" style="width:100%;" onclick="confirmReceipt()" id="t-scan-confirm">Confirm demo record</button>
                                 </div>
                                 <p id="empty-state" style="color: var(--text-muted); text-align: center; padding: 40px;">No receipt uploaded yet.</p>
                                 
                                 <div id="success-state" style="display: none; text-align: center; padding: 40px;">
                                     <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: #10B981; margin-bottom: 16px;"></i>
-                                    <h3 style="color: #10B981;">Demo Record Confirmed</h3>
-                                    <p style="color: var(--text-muted); margin-top: 8px;">The review step is complete. No taxpayer data was transmitted or saved to a server.</p>
+                                    <h3 style="color: var(--primary-accent);" id="kr-save-title">Record saved</h3>
+                                    <p style="color: var(--text-muted); margin-top: 8px;" id="kr-save-copy">Your totals have updated. This record is saved on this device.</p><button type="button" class="btn-primary" data-kr="overview" style="margin-top:16px">View updated overview</button>
                                     <button type="button" class="btn-secondary" style="margin-top: 16px; padding: 8px 16px; background: transparent; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer;" onclick="resetScan()">Review another receipt</button>
                                 </div>
                             </div>
@@ -693,6 +624,7 @@
         </div>
     </div>
     <div id="prototype-toast" class="prototype-toast" role="status" aria-live="polite"></div>
-    <script src="script.js"></script>
+    <script src="script.js?v=2.1"></script>
+<script type="module" src="workspace.js?v=2.1"></script>
 </body>
 </html>

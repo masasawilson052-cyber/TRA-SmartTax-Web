@@ -2,7 +2,7 @@
 
 KodiRahisi AI is an **independent innovation prototype** for Tanzania's micro and small businesses. It demonstrates how daily records, guided tax assistance, receipt review, reminders and links to approved TRA services could be combined into a simpler compliance journey.
 
-> **Important:** This repository is not an official Tanzania Revenue Authority (TRA) production system. It has no live taxpayer-account, payment, filing, EFD/EFDMS, OCR or production-AI connection.
+> **Important:** This repository is not an official Tanzania Revenue Authority (TRA) production system. It has no live taxpayer-account, payment, filing, EFD/EFDMS or production-AI connection. Receipt reading runs on the device.
 
 ## What is functional in this public build
 
@@ -10,7 +10,7 @@ KodiRahisi AI is an **independent innovation prototype** for Tanzania's micro an
 - English / Kiswahili switching for the core workflow.
 - Guided “Amina's Shop” taxpayer journey.
 - Rule-linked **presumptive income-tax guidance calculator** for eligible resident individuals.
-- Local receipt-image preview using the browser `FileReader` API.
+- On-device image/PDF receipt reading, saved records, record-derived totals and CSV export.
 - Editable receipt-review fields and explicit taxpayer confirmation.
 - Downloadable `.ics` calendar reminders for dates supported by current TRA guidance.
 - Clearly labeled e-receipt **integration demonstration**.
@@ -20,7 +20,7 @@ KodiRahisi AI is an **independent innovation prototype** for Tanzania's micro an
 ## What is intentionally simulated
 
 - The guided assistant is currently a curated **rule-based demonstration**, not a live LLM/AI model.
-- Receipt “extraction” is illustrative; the public site does not run OCR. The user can load a clearly labeled demo extraction and then correct the fields.
+- The receipt reader extracts actual text; every field requires review. Generative AI and voice remain planned.
 - e-Receipt output is a demonstration only. It uses `KR-DEMO-*` references and is visibly marked **NOT VALID FOR TAX PURPOSES**.
 
 ## What a production pilot would require
@@ -42,7 +42,7 @@ The updated prototype avoids hard-coded claims where current rules are not suffi
 - TRA — VAT: https://www.tra.go.tz/page/value-added-tax-vat
 - TRA — Skills Development Levy: https://www.tra.go.tz/page/skills-development-levy-sdl
 - TRA — Tax Calendar: https://www.tra.go.tz/tax-calendar
-- TRA — Taxpayer Portal: https://identity.tra.go.tz/Account/Login
+- TRA — Taxpayer Portal: https://taxpayersportal.tra.go.tz/
 - TRA — Receipt Verification: https://verify.tra.go.tz/Home/Index
 - Tanzania Personal Data Protection Commission — Personal Data Protection Act, 2022: https://www.pdpc.go.tz/the-personal-data-protection-act-2022/
 
@@ -91,3 +91,7 @@ This makes post-submission improvements transparent in Git history.
 - `OFFICIAL_SOURCE_CHECKS.md` — official-source facts reviewed for the current demo.
 - `DEPLOYMENT_NOTES.md` — safe post-submission GitHub Pages update steps.
 
+
+## September 2026 website update
+
+See [UPDATE_NOTES.md](UPDATE_NOTES.md) for the current capabilities, data storage and shared receipt-reader dependency. The submitted PDF and the previous Git commits are retained.

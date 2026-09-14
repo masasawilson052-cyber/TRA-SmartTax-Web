@@ -3,12 +3,12 @@
 /**
  * KodiRahisi AI — independent innovation prototype.
  * This public build intentionally has no live TRA, payment, EFD, taxpayer-account,
- * OCR or production-AI integration. It demonstrates user journeys and controls.
+ * production-AI integration. Device receipt reading and saved records are provided by workspace.js.
  */
 
 const OFFICIAL = {
     traHome: 'https://www.tra.go.tz/',
-    taxpayerPortal: 'https://identity.tra.go.tz/Account/Login',
+    taxpayerPortal: 'https://taxpayersportal.tra.go.tz/',
     incomeTaxIndividuals: 'https://www.tra.go.tz/page/income-tax-for-individuals',
     taxCalendar: 'https://www.tra.go.tz/tax-calendar',
     receiptVerification: 'https://verify.tra.go.tz/Home/Index',
@@ -146,6 +146,8 @@ function setLanguage(lang) {
     }
     renderJourneyStep();
     if (document.querySelector('.deadline-date')) initializeDeadlines();
+    window.refreshKodiWorkspace?.();
+    if (document.getElementById('calc-result')?.style.display === 'block') calculateTax();
 }
 
 function toggleTheme() {
@@ -221,7 +223,7 @@ function navigateTo(targetId) {
     if (targetView) targetView.classList.add('active');
 
     document.querySelectorAll('.nav-item').forEach(nav => nav.classList.toggle('active', nav.getAttribute('data-target') === targetId));
-    if (targetId === 'dashboard') setTimeout(initChart, 30);
+    if (targetId === 'dashboard') window.refreshKodiWorkspace?.();
     if (targetId === 'journey') renderJourneyStep();
 
     const sidebar = document.querySelector('.sidebar-secondary');
@@ -270,7 +272,7 @@ const journeySteps = [
     },
     {
         icon: 'fa-camera', title: '2. Capture a receipt',
-        en: 'She selects a supplier receipt. The current public build previews the file locally and demonstrates the proposed AI-review step.',
+        en: 'She selects a receipt. The browser reads the image or one-page PDF, and she checks the extracted fields before saving.',
         sw: 'Anachagua risiti ya muuzaji. Onyesho la sasa linaonyesha faili ndani ya kivinjari na kuonyesha hatua inayopendekezwa ya AI.',
         action: { label: 'Open Receipt Demo', target: 'records' }
     },
@@ -335,7 +337,8 @@ function changeJourneyStep(delta) {
 
 // ---------------- Focused tax guidance calculator ----------------
 function calculateTax() {
-    const revenue = Number(document.getElementById('calc-revenue')?.value || 0);
+    const rawRevenue = document.getElementById('calc-revenue')?.value.trim() || '';
+    const revenue = Number(rawRevenue);
     const recordStatus = document.getElementById('calc-records')?.value || 'complete';
     const result = document.getElementById('calc-result');
     const amountEl = document.getElementById('calc-amount');
@@ -346,11 +349,13 @@ function calculateTax() {
     result.style.display = 'block';
     reliefEl.style.display = 'none';
 
-    if (!Number.isFinite(revenue) || revenue < 0) {
+    if (!rawRevenue || !Number.isSafeInteger(revenue) || revenue < 0) {
         amountEl.textContent = '—';
         explanationEl.textContent = currentLang === 'sw' ? 'Weka mauzo ya mwaka yenye thamani sahihi.' : 'Enter a valid non-negative annual turnover.';
         return;
     }
+
+    if (!document.getElementById('calc-eligible')?.checked) { amountEl.textContent='—'; explanationEl.textContent=currentLang==='sw'?'Thibitisha ustahiki na mauzo ya mwaka mzima kwanza.':'Confirm eligibility and full-year turnover first.'; return; }
 
     if (revenue > 200_000_000) {
         amountEl.textContent = 'Outside demo scope';
@@ -488,7 +493,7 @@ function generateAIResponse(message) {
             ? `<p><strong>Usalama kwanza:</strong> Usitumie TIN halisi, nenosiri, OTP au taarifa nyeti kwenye onyesho hili la umma. Faili ya risiti unayochagua inaonyeshwa ndani ya kivinjari na script hii haitumi kwenye backend.</p><p>Mfumo wa uzalishaji ungehitaji msingi wa kisheria, upunguzaji wa data, udhibiti wa ufikiaji, muda wa kuhifadhi na tathmini ya faragha.</p>${internalButton('Angalia Usalama na Faragha', 'proposal')}`
             : `<p><strong>Safety first:</strong> Do not enter a real TIN, password, OTP or confidential taxpayer data in this public prototype. A selected receipt is previewed locally and this script does not upload it to a backend.</p><p>A production service would require lawful purpose, data minimisation, access controls, retention rules and privacy assessment.</p>${internalButton('See Safety & Privacy', 'proposal')}`);
     }
-    if (/calculate|estimate|presumptive|kadiria|makadirio|kodi/.test(m)) {
+    if (/calculate|estimate|presumptive|kadiria|makadirio/.test(m)) {
         return prefix + (sw
             ? `<p>Kodi hutegemea aina ya mlipakodi, shughuli, mauzo/mapato, rekodi na kanuni za sasa. Onyesho hili linakokotoa tu ratiba ya <strong>presumptive income tax</strong> kwa watu binafsi wanaostahili.</p><p>Kikokotoo kinaonyesha chanzo na hakibadilishi tathmini rasmi ya TRA.</p>${internalButton('Fungua Kikokotoo', 'calculator')}`
             : `<p>Tax depends on taxpayer type, activity, turnover/income, records and current law. This demo calculates only the <strong>presumptive income-tax schedule</strong> for eligible resident individual businesses.</p><p>The calculator shows its rule source and does not replace a TRA assessment.</p>${internalButton('Open Tax Calculator', 'calculator')}`);
@@ -524,87 +529,7 @@ function generateAIResponse(message) {
         : `<p>I am the KodiRahisi AI guided demonstration. The public build uses curated rule-based responses rather than a production AI model.</p><p>I can demonstrate TIN guidance, presumptive-tax estimates, deadlines, receipt review, privacy controls and routes to official TRA services.</p>${internalButton("Start Amina's Journey", 'journey')}`);
 }
 
-// ---------------- Receipt capture & review ----------------
-function simulateScan() {
-    const input = document.getElementById('file-upload');
-    const file = input?.files?.[0];
-    if (!file) return;
-    if (file.size > 8 * 1024 * 1024) {
-        showPrototypeNotice('For this public demo, choose a file smaller than 8 MB.');
-        input.value = '';
-        return;
-    }
-
-    document.getElementById('upload-container').style.display = 'none';
-    document.getElementById('receipt-preview-container').style.display = 'block';
-    document.getElementById('empty-state').style.display = 'none';
-    document.getElementById('scan-details').style.display = 'none';
-    document.getElementById('success-state').style.display = 'none';
-    document.getElementById('scan-loading').style.display = 'block';
-
-    const img = document.getElementById('receipt-image-preview');
-    const filePreview = document.getElementById('receipt-file-preview');
-    const fileName = document.getElementById('receipt-file-name');
-    if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = () => {
-            img.src = reader.result;
-            img.style.display = 'block';
-            filePreview.style.display = 'none';
-        };
-        reader.readAsDataURL(file);
-    } else {
-        img.style.display = 'none';
-        filePreview.style.display = 'flex';
-        fileName.textContent = file.name;
-    }
-
-    setTimeout(() => {
-        document.getElementById('scan-loading').style.display = 'none';
-        document.getElementById('scan-details').style.display = 'block';
-        const date = document.getElementById('scan-date');
-        if (date && !date.value) date.value = new Date().toISOString().slice(0, 10);
-    }, 650);
-}
-
-function loadDemoExtraction() {
-    const today = new Date().toISOString().slice(0, 10);
-    document.getElementById('scan-date').value = today;
-    document.getElementById('scan-seller').value = 'Mlimani Office Supplies — illustrative';
-    document.getElementById('scan-total').value = '50000';
-    document.getElementById('scan-tax').value = '7627.12';
-    showPrototypeNotice('Illustrative extraction loaded. Correct any field before confirming.');
-}
-
-function confirmReceipt() {
-    const confirmed = document.getElementById('scan-confirmed')?.checked;
-    const total = Number(document.getElementById('scan-total')?.value || 0);
-    if (!confirmed) {
-        showPrototypeNotice('Please confirm that you reviewed the prototype fields before saving the demo record.');
-        return;
-    }
-    if (!Number.isFinite(total) || total <= 0) {
-        showPrototypeNotice('Enter a valid total amount before confirming the demo record.');
-        return;
-    }
-    document.getElementById('scan-details').style.display = 'none';
-    document.getElementById('success-state').style.display = 'block';
-}
-
-function resetScan() {
-    const input = document.getElementById('file-upload');
-    if (input) input.value = '';
-    const img = document.getElementById('receipt-image-preview');
-    if (img) { img.src = ''; img.style.display = 'none'; }
-    document.getElementById('receipt-file-preview').style.display = 'none';
-    document.getElementById('receipt-preview-container').style.display = 'none';
-    document.getElementById('success-state').style.display = 'none';
-    document.getElementById('scan-details').style.display = 'none';
-    document.getElementById('upload-container').style.display = 'block';
-    document.getElementById('empty-state').style.display = 'block';
-    ['scan-date', 'scan-seller', 'scan-total', 'scan-tax'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-    const cb = document.getElementById('scan-confirmed'); if (cb) cb.checked = false;
-}
+// Receipt capture, local persistence and exports are implemented in workspace.js.
 
 // ---------------- e-Receipt integration demonstration ----------------
 function generateReceipt() {
